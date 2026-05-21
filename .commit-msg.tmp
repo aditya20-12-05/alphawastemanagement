@@ -1,0 +1,11 @@
+Replace cinematic with engineering Process Flow Diagram
+
+The illustrated factory/cubes/smokestacks read as childish. Replaced with
+a scroll-constructed PFD that builds itself across four chapters:
+
+* Title block, axis ticks, drawing-frame corner crosshairs, blueprint grid
+* Equipment as PFD-style double-bordered tag-circled boxes (A-100..A-400)
+* Streams as labeled paths with stream tags in monospace diamonds
+* Stage IV closes with a Mass Balance Certificate stamp
+
+Aesthetic: industrial-spec document, not children's-book illustration.
