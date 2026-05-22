@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import PageFooter from "@/components/ui/PageFooter";
-import PartnerModels from "@/components/sections/PartnerModels";
+import PartnerEngagement from "@/components/sections/PartnerEngagement";
 import PartnerOffer from "@/components/sections/PartnerOffer";
-import PartnerContact from "@/components/sections/PartnerContact";
 
 export const metadata: Metadata = {
   title: "Partner with Alpha — Engagement Models",
@@ -25,9 +24,8 @@ export default function PartnerPage() {
           { label: "Response time", value: "≤ 2 days" },
         ]}
       />
-      <PartnerModels />
+      <PartnerEngagement />
       <PartnerOffer />
-      <PartnerContact />
       <PageFooter />
     </main>
   );

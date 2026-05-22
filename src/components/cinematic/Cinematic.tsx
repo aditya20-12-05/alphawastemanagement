@@ -1,11 +1,11 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "motion/react";
+import { motion, useScroll, useSpring, useMotionValueEvent, AnimatePresence } from "motion/react";
 import { useRef, useState } from "react";
 
 /* --------------------------------------------------------------------------
    ALPHA · PROCESS FLOW DIAGRAM (PFD-001)
-   Scroll-constructed technical drawing.
+   Scroll-constructed engineering drawing. Each chapter advances the diagram.
 -------------------------------------------------------------------------- */
 
 const PHASES = [
@@ -26,7 +26,7 @@ const PHASES = [
   {
     key: "process",
     numeral: "III",
-    title: "Recovery & Hydrometallurgy",
+    title: "Recovery & Hydromet",
     caption:
       "Recovery A-200 separates metal from oxide-bearing dust. Hydromet A-300 extracts gypsum, sodium sulphate, and metal oxides.",
   },
@@ -44,13 +44,14 @@ const SAGE = "#4A7C4E";
 const LINE = "#D5CFBC";
 const PAPER = "#F5F1E8";
 const RUST = "#8B4A2A";
+const MUTED = "#6B6862";
 
-// Camera viewports — each phase focuses on a different region of the diagram.
+// Camera viewports per chapter — pans focus to the active stage.
 const CAMERAS = [
-  "20 140 700 360",   // phase I: focus on input + segregator area
-  "20 60 800 500",    // phase II: input + segregator + branches
-  "260 60 800 500",   // phase III: segregator + recovery + hydromet
-  "0 0 1200 600",     // phase IV: whole diagram including brick plant
+  "10 150 700 360", // I: input region
+  "10 60  820 520", // II: input + segregation + return loop
+  "240 60 940 460", // III: rec + hydromet + outputs
+  "0 0   1200 600", // IV: full diagram including brick plant + stamp
 ];
 
 export default function Cinematic() {
@@ -61,18 +62,14 @@ export default function Cinematic() {
     offset: ["start start", "end end"],
   });
 
-  // Smooth the scroll progress so phase transitions feel paced, not snappy.
   const smoothed = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.4 });
 
   useMotionValueEvent(smoothed, "change", (v) => {
-    // Add a stability margin so a single bumpy scroll doesn't skip phases.
-    const raw = v * PHASES.length;
-    const idx = Math.min(PHASES.length - 1, Math.max(0, Math.floor(raw)));
+    const idx = Math.min(PHASES.length - 1, Math.max(0, Math.floor(v * PHASES.length)));
     if (idx !== activePhase) setActivePhase(idx);
   });
 
   return (
-    // 800vh = ~200vh per phase. Each phase needs deliberate scroll to advance.
     <section ref={ref} className="relative" style={{ height: "800vh" }}>
       <div className="sticky top-0 h-screen overflow-hidden bg-paper">
         <BlueprintGrid />
@@ -81,7 +78,7 @@ export default function Cinematic() {
         <TitleBlock />
         <RevisionStamp activePhase={activePhase} />
 
-        <div className="absolute inset-0 flex items-center justify-center pt-20 pb-36 px-6 sm:px-12">
+        <div className="absolute inset-0 flex items-center justify-center pt-20 pb-40 px-6 sm:px-12">
           <PFDCanvas activePhase={activePhase} />
         </div>
 
@@ -96,19 +93,12 @@ export default function Cinematic() {
 
 function BlueprintGrid() {
   return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      preserveAspectRatio="none"
-    >
+    <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
       <defs>
-        <pattern id="grid-fine" width="32" height="32" patternUnits="userSpaceOnUse">
-          <path d="M 32 0 L 0 0 0 32" fill="none" stroke={LINE} strokeWidth="0.4" opacity="0.45" />
-        </pattern>
-        <pattern id="grid-coarse" width="128" height="128" patternUnits="userSpaceOnUse">
-          <path d="M 128 0 L 0 0 0 128" fill="none" stroke={LINE} strokeWidth="0.5" opacity="0.55" />
+        <pattern id="grid-coarse" width="120" height="120" patternUnits="userSpaceOnUse">
+          <path d="M 120 0 L 0 0 0 120" fill="none" stroke={LINE} strokeWidth="0.5" opacity="0.5" />
         </pattern>
       </defs>
-      <rect width="100%" height="100%" fill="url(#grid-fine)" />
       <rect width="100%" height="100%" fill="url(#grid-coarse)" />
     </svg>
   );
@@ -132,14 +122,14 @@ function CornerMarks() {
             left: c.left,
             right: c.right,
             transform: `rotate(${c.rot}deg)`,
-            width: 24,
-            height: 24,
+            width: 22,
+            height: 22,
           }}
           className="pointer-events-none"
         >
-          <svg viewBox="0 0 24 24" className="w-full h-full">
-            <line x1="0" y1="0" x2="12" y2="0" stroke={FOREST} strokeWidth="1.2" />
-            <line x1="0" y1="0" x2="0" y2="12" stroke={FOREST} strokeWidth="1.2" />
+          <svg viewBox="0 0 22 22" className="w-full h-full">
+            <line x1="0" y1="0" x2="11" y2="0" stroke={FOREST} strokeWidth="1.2" />
+            <line x1="0" y1="0" x2="0" y2="11" stroke={FOREST} strokeWidth="1.2" />
           </svg>
         </div>
       ))}
@@ -159,8 +149,6 @@ function TitleBlock() {
       </div>
       <div className="hidden sm:flex items-center gap-4">
         <span>Sheet 01 of 01</span>
-        <span className="opacity-40">/</span>
-        <span>Scale n.t.s.</span>
       </div>
     </div>
   );
@@ -191,9 +179,7 @@ function ProgressBar({ activePhase }: { activePhase: number }) {
             <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.28em] text-forest">
               {p.numeral}
             </span>
-            {i < PHASES.length - 1 && (
-              <span className="h-px w-4 sm:w-10 bg-forest/30" />
-            )}
+            {i < PHASES.length - 1 && <span className="h-px w-4 sm:w-10 bg-forest/30" />}
           </motion.div>
         ))}
       </div>
@@ -216,9 +202,7 @@ function Captions({ activePhase }: { activePhase: number }) {
             className="absolute inset-0"
           >
             <div className="flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.28em] text-forest">
-              <span className="border border-forest px-1.5 py-0.5">
-                Chapter {phase.numeral}
-              </span>
+              <span className="border border-forest px-1.5 py-0.5">Chapter {phase.numeral}</span>
               <span className="opacity-60">{phase.title}</span>
             </div>
             <p className="mt-3 text-sm sm:text-base text-graphite leading-relaxed max-w-2xl">
@@ -231,7 +215,18 @@ function Captions({ activePhase }: { activePhase: number }) {
   );
 }
 
-/* ---------- The PFD canvas — viewBox animates per phase ---------------- */
+/* ---------- Coordinates (clean grid) ----------------------------------- */
+/*
+   Equipment row at y=200..280 (height=80, width=110, gap=40)
+   Equipment x positions:
+     INPUT  x=40..150
+     SEG    x=270..380
+     REC    x=500..610
+     HYD    x=730..840
+     BRICK  x=730..840  y=380..460
+   Terminals on right side (x=1040..1180)
+   Mass balance stamp at lower-left (40..300, 470..550)
+*/
 
 function PFDCanvas({ activePhase }: { activePhase: number }) {
   return (
@@ -253,73 +248,116 @@ function PFDCanvas({ activePhase }: { activePhase: number }) {
         </marker>
       </defs>
 
-      {/* Input source */}
+      {/* ---------- Phase I — input ---------- */}
       <InputSource active={activePhase === 0} visible={activePhase >= 0} />
       <Stream
-        d="M 168 240 L 296 240"
+        d="M 150 240 L 264 240"
         tagId="S01"
-        label="Industrial waste"
-        sublabel="~180 MT/mo"
+        topLabel="Industrial waste"
+        topSubLabel="~180 MT/mo"
+        tagPos={{ x: 207, y: 240 }}
+        labelPos={{ x: 207, y: 218 }}
         active={activePhase === 0 || activePhase === 1}
         visible={activePhase >= 0}
       />
 
-      {/* Segregator + outputs */}
-      <Equipment
-        id="A-100"
-        title="Segregator"
-        x={300}
-        y={196}
-        w={140}
-        h={88}
-        active={activePhase === 1}
-        visible={activePhase >= 1}
-      />
+      {/* ---------- Phase II — segregation + return loop ---------- */}
+      <Equipment id="A-100" title="Segregator" x={270} y={200} w={110} h={80} active={activePhase === 1} visible={activePhase >= 1} />
       <Stream
-        d="M 444 240 L 564 240"
+        d="M 380 240 L 494 240"
         tagId="S02"
-        label="Residue"
-        sublabel=""
+        topLabel="Residue"
+        tagPos={{ x: 437, y: 240 }}
+        labelPos={{ x: 437, y: 218 }}
         active={activePhase === 1 || activePhase === 2}
         visible={activePhase >= 1}
         delay={0.4}
       />
+      {/* S05 return loop — long path: up from seg, across to melt shop */}
       <Stream
-        d="M 370 196 L 370 100 L 1080 100"
+        d="M 325 200 L 325 110 L 1080 110"
         tagId="S05"
-        label="Metal fines"
-        sublabel="→ melt shop"
-        labelX={720}
-        labelY={84}
+        topLabel="Metal fines → melt shop"
+        tagPos={{ x: 325, y: 145 }}
+        labelPos={{ x: 700, y: 96 }}
         active={activePhase === 1}
         visible={activePhase >= 1}
         delay={0.55}
         color="sage"
       />
-      <Terminal x={1080} y={100} label="MELT SHOP" visible={activePhase >= 1} delay={0.85} variant="sage" active={activePhase === 1} />
+      <Terminal x={1080} y={110} w={100} label="MELT SHOP" visible={activePhase >= 1} delay={0.85} variant="sage" active={activePhase === 1} />
 
-      {/* Recovery + Hydromet */}
-      <Equipment id="A-200" title="Recovery" x={566} y={196} w={140} h={88} active={activePhase === 2} visible={activePhase >= 2} />
+      {/* ---------- Phase III — recovery + hydromet + outputs ---------- */}
+      <Equipment id="A-200" title="Recovery" x={500} y={200} w={110} h={80} active={activePhase === 2} visible={activePhase >= 2} />
       <Stream
-        d="M 710 240 L 818 240"
+        d="M 610 240 L 724 240"
         tagId="S03"
-        label="Recovered metal"
-        sublabel=""
+        topLabel="Recovered metal"
+        tagPos={{ x: 667, y: 240 }}
+        labelPos={{ x: 667, y: 218 }}
         active={activePhase === 2}
         visible={activePhase >= 2}
         delay={0.4}
       />
-      <Equipment id="A-300" title="Hydrometallurgy" x={820} y={196} w={140} h={88} active={activePhase === 2} visible={activePhase >= 2} delay={0.5} />
-      <Stream d="M 964 220 L 1080 220" tagId="S06" label="Gypsum" sublabel="CaSO₄" active={activePhase === 2} visible={activePhase >= 2} delay={0.8} />
-      <Stream d="M 964 240 L 1080 240" tagId="S07" label="Sodium sulphate" sublabel="Na₂SO₄" active={activePhase === 2} visible={activePhase >= 2} delay={0.9} labelY={272} />
-      <Stream d="M 964 260 L 1080 260" tagId="S08" label="Metal oxides" sublabel="Fe₂O₃ · Cr₂O₃ · NiO" active={activePhase === 2} visible={activePhase >= 2} delay={1.0} labelY={296} />
-      <Terminal x={1080} y={220} label="OUTPUTS · S06–S08" visible={activePhase >= 2} delay={1.2} bigHeight={84} active={activePhase === 2} />
+      <Equipment id="A-300" title="Hydromet" x={730} y={200} w={110} h={80} active={activePhase === 2} visible={activePhase >= 2} delay={0.5} />
 
-      {/* Brick plant + bricks */}
-      <Stream d="M 890 284 L 890 380" tagId="S04" label="Fines" sublabel="" active={activePhase === 3} visible={activePhase >= 3} labelX={920} labelY={336} />
-      <Equipment id="A-400" title="Brick Plant" x={820} y={380} w={140} h={88} active={activePhase === 3} visible={activePhase >= 3} delay={0.3} />
-      <Stream d="M 964 424 L 1080 424" tagId="S09" label="Cement-less bricks" sublabel="19–20 kg/sq mm" active={activePhase === 3} visible={activePhase >= 3} delay={0.6} color="rust" />
-      <Terminal x={1080} y={424} label="BRICKS · S09" visible={activePhase >= 3} delay={0.8} variant="rust" active={activePhase === 3} />
+      {/* Three output streams from Hydromet to the OUTPUTS panel.
+          Labels live INSIDE the panel — only the diamond tags sit on the lines. */}
+      <Stream
+        d="M 840 215 L 1034 215"
+        tagId="S06"
+        tagPos={{ x: 937, y: 215 }}
+        active={activePhase === 2 || activePhase === 3}
+        visible={activePhase >= 2}
+        delay={0.75}
+        noLabel
+      />
+      <Stream
+        d="M 840 240 L 1034 240"
+        tagId="S07"
+        tagPos={{ x: 937, y: 240 }}
+        active={activePhase === 2 || activePhase === 3}
+        visible={activePhase >= 2}
+        delay={0.85}
+        noLabel
+      />
+      <Stream
+        d="M 840 265 L 1034 265"
+        tagId="S08"
+        tagPos={{ x: 937, y: 265 }}
+        active={activePhase === 2 || activePhase === 3}
+        visible={activePhase >= 2}
+        delay={0.95}
+        noLabel
+      />
+      <OutputsPanel visible={activePhase >= 2} active={activePhase === 2} />
+
+      {/* ---------- Phase IV — slag → brick plant → bricks ---------- */}
+      <Stream
+        d="M 790 280 L 790 380"
+        tagId="S04"
+        topLabel="Fines"
+        tagPos={{ x: 790, y: 330 }}
+        labelPos={{ x: 820, y: 335 }}
+        labelAnchor="start"
+        active={activePhase === 3}
+        visible={activePhase >= 3}
+        delay={0.1}
+      />
+      <Equipment id="A-400" title="Brick Plant" x={730} y={380} w={110} h={80} active={activePhase === 3} visible={activePhase >= 3} delay={0.3} />
+      <Stream
+        d="M 840 420 L 1034 420"
+        tagId="S09"
+        topLabel="Cement-less bricks"
+        topSubLabel="19–20 kg/sq mm"
+        tagPos={{ x: 937, y: 420 }}
+        labelPos={{ x: 937, y: 398 }}
+        active={activePhase === 3}
+        visible={activePhase >= 3}
+        delay={0.55}
+        color="rust"
+      />
+      <Terminal x={1040} y={420} w={140} label="BRICKS · S09" visible={activePhase >= 3} delay={0.8} variant="rust" active={activePhase === 3} />
 
       <MassBalanceStamp visible={activePhase >= 3} />
     </motion.svg>
@@ -335,11 +373,11 @@ function InputSource({ active, visible }: { active: boolean; visible: boolean })
       animate={{ opacity: visible ? (active ? 1 : 0.4) : 0 }}
       transition={{ duration: 0.5 }}
     >
-      <rect x={48} y={196} width={120} height={88} fill="none" stroke={FOREST} strokeWidth="1.5" strokeDasharray="3 3" />
-      <text x={108} y={236} textAnchor="middle" fontSize="11" fontFamily="ui-monospace, monospace" letterSpacing="2" fill={FOREST}>
+      <rect x={40} y={200} width={110} height={80} fill="none" stroke={FOREST} strokeWidth="1.4" strokeDasharray="3 3" />
+      <text x={95} y={236} textAnchor="middle" fontSize="11" fontFamily="ui-monospace, monospace" letterSpacing="2" fill={FOREST}>
         INPUT
       </text>
-      <text x={108} y={252} textAnchor="middle" fontSize="9" fontFamily="ui-monospace, monospace" letterSpacing="1.4" fill={FOREST} opacity="0.7">
+      <text x={95} y={252} textAnchor="middle" fontSize="8" fontFamily="ui-monospace, monospace" letterSpacing="1.4" fill={FOREST} opacity="0.6">
         SOURCE
       </text>
     </motion.g>
@@ -362,14 +400,10 @@ function Equipment({ id, title, x, y, w, h, active, visible, delay = 0.15 }: Equ
   return (
     <motion.g
       initial={{ opacity: 0, scale: 0.94 }}
-      animate={{
-        opacity: visible ? (active ? 1 : 0.45) : 0,
-        scale: visible ? 1 : 0.94,
-      }}
+      animate={{ opacity: visible ? (active ? 1 : 0.4) : 0, scale: visible ? 1 : 0.94 }}
       transition={{ duration: 0.6, delay: visible ? delay : 0, ease: [0.16, 1, 0.3, 1] }}
       style={{ transformOrigin: `${x + w / 2}px ${y + h / 2}px` }}
     >
-      {/* Active highlight ring */}
       {active && (
         <motion.rect
           x={x - 6}
@@ -385,23 +419,23 @@ function Equipment({ id, title, x, y, w, h, active, visible, delay = 0.15 }: Equ
           transition={{ duration: 0.5 }}
         />
       )}
-      <rect x={x} y={y} width={w} height={h} fill={PAPER} stroke={FOREST} strokeWidth="1.5" />
-      <rect x={x + 4} y={y + 4} width={w - 8} height={h - 8} fill="none" stroke={FOREST} strokeWidth="0.6" />
-      <circle cx={x + 16} cy={y + 16} r="11" fill={PAPER} stroke={FOREST} strokeWidth="1.2" />
-      <text x={x + 16} y={y + 19} textAnchor="middle" fontSize="8" fontFamily="ui-monospace, monospace" fill={FOREST}>
+      <rect x={x} y={y} width={w} height={h} fill={PAPER} stroke={FOREST} strokeWidth="1.4" />
+      <rect x={x + 4} y={y + 4} width={w - 8} height={h - 8} fill="none" stroke={FOREST} strokeWidth="0.5" />
+      <circle cx={x + 14} cy={y + 14} r="9" fill={PAPER} stroke={FOREST} strokeWidth="1" />
+      <text x={x + 14} y={y + 17} textAnchor="middle" fontSize="7" fontFamily="ui-monospace, monospace" fill={FOREST}>
         {id.split("-")[1]}
       </text>
-      <text x={x + w / 2} y={y + h / 2 + 4} textAnchor="middle" fontSize="13" fontFamily="ui-monospace, monospace" letterSpacing="2" fill={FOREST}>
+      <text x={x + w / 2} y={y + h / 2 + 4} textAnchor="middle" fontSize="11" fontFamily="ui-monospace, monospace" letterSpacing="1.6" fill={FOREST}>
         {title.toUpperCase()}
       </text>
-      <text x={x + w / 2} y={y + h - 12} textAnchor="middle" fontSize="8" fontFamily="ui-monospace, monospace" letterSpacing="1.4" fill={FOREST} opacity="0.6">
+      <text x={x + w / 2} y={y + h - 10} textAnchor="middle" fontSize="7" fontFamily="ui-monospace, monospace" letterSpacing="1.2" fill={FOREST} opacity="0.55">
         {id}
       </text>
       {active && (
         <motion.circle
-          cx={x + w - 14}
-          cy={y + 14}
-          r="3"
+          cx={x + w - 12}
+          cy={y + 12}
+          r="2.5"
           fill={SAGE}
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
@@ -414,24 +448,39 @@ function Equipment({ id, title, x, y, w, h, active, visible, delay = 0.15 }: Equ
 interface StreamProps {
   d: string;
   tagId: string;
-  label: string;
-  sublabel: string;
+  topLabel?: string;
+  topSubLabel?: string;
+  tagPos: { x: number; y: number };
+  labelPos?: { x: number; y: number };
+  labelAnchor?: "start" | "middle" | "end";
   active: boolean;
   visible: boolean;
   delay?: number;
-  labelX?: number;
-  labelY?: number;
   color?: "forest" | "sage" | "rust";
+  noLabel?: boolean;
 }
 
-function Stream({ d, tagId, label, sublabel, active, visible, delay = 0.2, labelX, labelY, color = "forest" }: StreamProps) {
+function Stream({
+  d,
+  tagId,
+  topLabel,
+  topSubLabel,
+  tagPos,
+  labelPos,
+  labelAnchor = "middle",
+  active,
+  visible,
+  delay = 0.2,
+  color = "forest",
+  noLabel,
+}: StreamProps) {
   const stroke = color === "sage" ? SAGE : color === "rust" ? RUST : FOREST;
   const marker = color === "sage" ? "url(#arrow-sage)" : color === "rust" ? "url(#arrow-rust)" : "url(#arrow)";
 
   return (
     <motion.g
       initial={{ opacity: 0 }}
-      animate={{ opacity: visible ? (active ? 1 : 0.45) : 0 }}
+      animate={{ opacity: visible ? (active ? 1 : 0.4) : 0 }}
       transition={{ duration: 0.4 }}
     >
       <motion.path
@@ -444,86 +493,40 @@ function Stream({ d, tagId, label, sublabel, active, visible, delay = 0.2, label
         animate={{ pathLength: visible ? 1 : 0 }}
         transition={{ duration: 0.9, delay: visible ? delay : 0, ease: [0.16, 1, 0.3, 1] }}
       />
-      <StreamTag id={tagId} path={d} delay={delay + 0.55} visible={visible} color={color} x={labelX} y={labelY} />
-      <StreamLabel path={d} label={label} sublabel={sublabel} delay={delay + 0.65} visible={visible} x={labelX} y={labelY} />
-    </motion.g>
-  );
-}
 
-function StreamTag({
-  id,
-  path,
-  delay,
-  visible,
-  color,
-  x,
-  y,
-}: {
-  id: string;
-  path: string;
-  delay: number;
-  visible: boolean;
-  color: "forest" | "sage" | "rust";
-  x?: number;
-  y?: number;
-}) {
-  const stroke = color === "sage" ? SAGE : color === "rust" ? RUST : FOREST;
-  const m = path.match(/M\s*([\d.]+)\s+([\d.]+)/);
-  const tx = x ?? (m ? parseFloat(m[1]) + 22 : 0);
-  const ty = y ?? (m ? parseFloat(m[2]) - 12 : 0);
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: visible ? 1 : 0 }}
-      transition={{ duration: 0.4, delay: visible ? delay : 0 }}
-    >
-      <polygon points={`${tx},${ty - 7} ${tx + 14},${ty} ${tx},${ty + 7} ${tx - 14},${ty}`} fill={PAPER} stroke={stroke} strokeWidth="1" />
-      <text x={tx} y={ty + 3} textAnchor="middle" fontSize="7" fontFamily="ui-monospace, monospace" fill={stroke}>
-        {id}
-      </text>
-    </motion.g>
-  );
-}
-
-function StreamLabel({
-  path,
-  label,
-  sublabel,
-  delay,
-  visible,
-  x,
-  y,
-}: {
-  path: string;
-  label: string;
-  sublabel: string;
-  delay: number;
-  visible: boolean;
-  x?: number;
-  y?: number;
-}) {
-  const matches = Array.from(path.matchAll(/([\d.]+)\s+([\d.]+)/g)).map((m) => [
-    parseFloat(m[1]),
-    parseFloat(m[2]),
-  ]);
-  const start = matches[0] ?? [0, 0];
-  const end = matches[matches.length - 1] ?? [0, 0];
-  const mx = x ?? (start[0] + end[0]) / 2;
-  const my = y ?? Math.min(start[1], end[1]) - 8;
-
-  return (
-    <motion.g
-      initial={{ opacity: 0 }}
-      animate={{ opacity: visible ? 1 : 0 }}
-      transition={{ duration: 0.4, delay: visible ? delay : 0 }}
-    >
-      <text x={mx} y={my} textAnchor="middle" fontSize="9" fontFamily="ui-monospace, monospace" letterSpacing="1.2" fill={FOREST}>
-        {label.toUpperCase()}
-      </text>
-      {sublabel && (
-        <text x={mx} y={my + 11} textAnchor="middle" fontSize="7" fontFamily="ui-monospace, monospace" letterSpacing="1" fill={FOREST} opacity="0.6">
-          {sublabel}
+      {/* Stream tag diamond */}
+      <motion.g
+        initial={{ opacity: 0 }}
+        animate={{ opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.4, delay: visible ? delay + 0.55 : 0 }}
+      >
+        <polygon
+          points={`${tagPos.x},${tagPos.y - 7} ${tagPos.x + 14},${tagPos.y} ${tagPos.x},${tagPos.y + 7} ${tagPos.x - 14},${tagPos.y}`}
+          fill={PAPER}
+          stroke={stroke}
+          strokeWidth="1"
+        />
+        <text x={tagPos.x} y={tagPos.y + 3} textAnchor="middle" fontSize="7" fontFamily="ui-monospace, monospace" fill={stroke}>
+          {tagId}
         </text>
+      </motion.g>
+
+      {/* Optional floating label */}
+      {!noLabel && topLabel && labelPos && (
+        <motion.g
+          initial={{ opacity: 0 }}
+          animate={{ opacity: visible ? 1 : 0 }}
+          transition={{ duration: 0.4, delay: visible ? delay + 0.65 : 0 }}
+        >
+          <text x={labelPos.x} y={labelPos.y} textAnchor={labelAnchor} fontSize="9" fontFamily="ui-monospace, monospace" letterSpacing="1.2" fill={FOREST}>
+            {topLabel.toUpperCase()}
+          </text>
+          {topSubLabel && (
+            <text x={labelPos.x} y={labelPos.y + 10} textAnchor={labelAnchor} fontSize="7" fontFamily="ui-monospace, monospace" letterSpacing="1" fill={FOREST} opacity="0.55">
+              {topSubLabel}
+            </text>
+          )}
+        </motion.g>
       )}
     </motion.g>
   );
@@ -532,34 +535,79 @@ function StreamLabel({
 function Terminal({
   x,
   y,
+  w = 100,
   label,
   visible,
   delay = 0.2,
   variant = "forest",
-  bigHeight,
   active,
 }: {
   x: number;
   y: number;
+  w?: number;
   label: string;
   visible: boolean;
   delay?: number;
   variant?: "forest" | "sage" | "rust";
-  bigHeight?: number;
   active?: boolean;
 }) {
   const stroke = variant === "rust" ? RUST : variant === "sage" ? SAGE : FOREST;
-  const h = bigHeight ?? 32;
+  const h = 28;
   return (
     <motion.g
       initial={{ opacity: 0, x: -6 }}
-      animate={{ opacity: visible ? (active ? 1 : 0.5) : 0, x: 0 }}
+      animate={{ opacity: visible ? (active ? 1 : 0.45) : 0, x: 0 }}
       transition={{ duration: 0.5, delay: visible ? delay : 0 }}
     >
-      <rect x={x} y={y - h / 2} width={108} height={h} fill={PAPER} stroke={stroke} strokeWidth="1.2" />
-      <text x={x + 54} y={y + 3} textAnchor="middle" fontSize="9" fontFamily="ui-monospace, monospace" letterSpacing="1.8" fill={stroke}>
+      <rect x={x} y={y - h / 2} width={w} height={h} fill={PAPER} stroke={stroke} strokeWidth="1.2" />
+      <text x={x + w / 2} y={y + 3} textAnchor="middle" fontSize="9" fontFamily="ui-monospace, monospace" letterSpacing="1.6" fill={stroke}>
         {label}
       </text>
+    </motion.g>
+  );
+}
+
+/* OutputsPanel — labelled terminal containing the three Hydromet outputs.
+   Labels live INSIDE this panel rather than floating on the stream lines —
+   that's what removes the previous overlap clutter. */
+function OutputsPanel({ visible, active }: { visible: boolean; active: boolean }) {
+  const x = 1034;
+  const y = 192;
+  const w = 156;
+  const h = 96;
+  const rows = [
+    { tag: "S06", name: "GYPSUM", note: "CaSO₄" },
+    { tag: "S07", name: "Na₂SO₄", note: "Sodium sulphate" },
+    { tag: "S08", name: "OXIDES", note: "Fe₂O₃ · Cr₂O₃" },
+  ];
+
+  return (
+    <motion.g
+      initial={{ opacity: 0, x: -6 }}
+      animate={{ opacity: visible ? (active ? 1 : 0.45) : 0, x: 0 }}
+      transition={{ duration: 0.55, delay: visible ? 1.05 : 0 }}
+    >
+      <rect x={x} y={y} width={w} height={h} fill={PAPER} stroke={FOREST} strokeWidth="1.2" />
+      <rect x={x} y={y} width={w} height={14} fill={FOREST} />
+      <text x={x + w / 2} y={y + 10} textAnchor="middle" fontSize="8" fontFamily="ui-monospace, monospace" letterSpacing="2" fill={PAPER}>
+        OUTPUTS
+      </text>
+      {rows.map((r, i) => {
+        const ry = y + 24 + i * 23;
+        return (
+          <g key={r.tag}>
+            <text x={x + 8} y={ry} fontSize="7" fontFamily="ui-monospace, monospace" letterSpacing="1.2" fill={FOREST} opacity="0.65">
+              {r.tag}
+            </text>
+            <text x={x + 36} y={ry} fontSize="9" fontFamily="ui-monospace, monospace" letterSpacing="1.2" fill={FOREST}>
+              {r.name}
+            </text>
+            <text x={x + 36} y={ry + 9} fontSize="7" fontFamily="ui-monospace, monospace" fill={FOREST} opacity="0.55">
+              {r.note}
+            </text>
+          </g>
+        );
+      })}
     </motion.g>
   );
 }
@@ -570,17 +618,17 @@ function MassBalanceStamp({ visible }: { visible: boolean }) {
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0.85 }}
       transition={{ duration: 0.65, delay: visible ? 1.1 : 0, ease: [0.16, 1, 0.3, 1] }}
-      style={{ transformOrigin: "180px 480px" }}
+      style={{ transformOrigin: "170px 510px" }}
     >
-      <rect x={48} y={448} width={264} height={80} fill="none" stroke={FOREST} strokeWidth="1.5" />
-      <rect x={52} y={452} width={256} height={72} fill="none" stroke={FOREST} strokeWidth="0.6" />
-      <text x={180} y={474} textAnchor="middle" fontSize="9" fontFamily="ui-monospace, monospace" letterSpacing="2.4" fill={FOREST}>
+      <rect x={40} y={470} width={260} height={80} fill="none" stroke={FOREST} strokeWidth="1.4" />
+      <rect x={44} y={474} width={252} height={72} fill="none" stroke={FOREST} strokeWidth="0.5" />
+      <text x={170} y={494} textAnchor="middle" fontSize="9" fontFamily="ui-monospace, monospace" letterSpacing="2.4" fill={FOREST}>
         MASS BALANCE
       </text>
-      <text x={180} y={498} textAnchor="middle" fontSize="20" fontFamily="ui-serif, Georgia" fill={FOREST}>
+      <text x={170} y={520} textAnchor="middle" fontSize="20" fontFamily="ui-serif, Georgia" fill={FOREST}>
         100 % closed
       </text>
-      <text x={180} y={516} textAnchor="middle" fontSize="8" fontFamily="ui-monospace, monospace" letterSpacing="1.5" fill={FOREST} opacity="0.7">
+      <text x={170} y={538} textAnchor="middle" fontSize="7" fontFamily="ui-monospace, monospace" letterSpacing="1.4" fill={FOREST} opacity="0.65">
         Σ outputs = Σ inputs · zero residue
       </text>
     </motion.g>
