@@ -99,8 +99,10 @@ const products = [
 ];
 
 export default function ProductsShowcase() {
-  const [active, setActive] = useState(0);
-  const current = products[active];
+  // Nothing selected initially — datasheet shows a placeholder until the
+  // visitor picks a specimen.
+  const [active, setActive] = useState<number | null>(null);
+  const current = active === null ? null : products[active];
 
   return (
     <section className="relative py-20 sm:py-28 overflow-hidden">
@@ -125,22 +127,30 @@ export default function ProductsShowcase() {
 
         {/* Specimen rail */}
         <Reveal className="mt-12 sm:mt-14" direction="up">
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
+          <div
+            className="grid grid-cols-2 sm:grid-cols-5 gap-4 sm:gap-5"
+            style={{ perspective: "1400px" }}
+          >
             {products.map((p, i) => (
               <SpecimenCard
                 key={p.id}
                 product={p}
                 index={i}
                 isActive={i === active}
-                onClick={() => setActive(i)}
+                anySelected={active !== null}
+                onClick={() => setActive(active === i ? null : i)}
               />
             ))}
           </div>
         </Reveal>
 
         {/* Datasheet panel */}
-        <Reveal className="mt-6" direction="up">
-          <DatasheetPanel product={current} index={active} />
+        <Reveal className="mt-8" direction="up">
+          {current === null || active === null ? (
+            <EmptyDatasheet />
+          ) : (
+            <DatasheetPanel product={current} index={active} />
+          )}
         </Reveal>
       </div>
     </section>
@@ -151,83 +161,148 @@ function SpecimenCard({
   product,
   index,
   isActive,
+  anySelected,
   onClick,
 }: {
   product: (typeof products)[number];
   index: number;
   isActive: boolean;
+  anySelected: boolean;
   onClick: () => void;
 }) {
+  // Lift / scale based on selection state. The continuous Y bob is on an
+  // inner wrapper so it doesn't fight with these state transitions.
+  const targetY = isActive ? -14 : 0;
+  const targetScale = isActive ? 1.04 : anySelected ? 0.96 : 1;
+  const targetOpacity = anySelected && !isActive ? 0.62 : 1;
+
+  // A drop shadow that strengthens with elevation gives the floating feel.
+  const shadow = isActive
+    ? "0 36px 60px -22px rgba(14,47,35,0.45), 0 14px 28px -14px rgba(14,47,35,0.28)"
+    : "0 18px 36px -14px rgba(14,47,35,0.28), 0 6px 16px -10px rgba(14,47,35,0.16)";
+
   return (
     <motion.button
       onClick={onClick}
-      animate={{
-        y: isActive ? -6 : 0,
-      }}
-      whileHover={{ y: isActive ? -6 : -3 }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-      className={`group relative aspect-[3/4] rounded-2xl overflow-hidden text-left transition-shadow ${
-        isActive ? "shadow-deep ring-2 ring-forest" : "ring-1 ring-line hover:ring-forest/40"
+      animate={{ y: targetY, scale: targetScale, opacity: targetOpacity }}
+      whileHover={{ y: targetY - 4 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      className={`group relative aspect-[3/4] rounded-2xl text-left ${
+        isActive ? "ring-2 ring-forest" : "ring-1 ring-line/50"
       }`}
-      style={{ background: product.accent, color: product.fg }}
+      style={{
+        boxShadow: shadow,
+        transformStyle: "preserve-3d",
+      }}
       aria-pressed={isActive}
     >
-      {/* Material pattern */}
-      <SwatchPattern variant={product.pattern} color={product.fg} />
+      {/* Inner wrapper carries the continuous float-bob */}
+      <motion.div
+        className="relative h-full w-full rounded-2xl overflow-hidden"
+        animate={{ y: [0, -5, 0] }}
+        transition={{
+          duration: 4.4 + index * 0.35,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: index * 0.55,
+        }}
+        style={{ background: product.accent, color: product.fg }}
+      >
+        {/* Material pattern */}
+        <SwatchPattern variant={product.pattern} color={product.fg} />
 
-      {/* Subtle vignette overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent pointer-events-none" />
+        {/* Highlight ridge — gives the card a slight 3D edge */}
+        <div
+          className="absolute inset-x-0 top-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${product.fg}33, transparent)` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/[0.04] pointer-events-none" />
 
-      {/* Top bar — stream tag + index */}
-      <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-        <span
-          className="font-mono text-[9px] uppercase tracking-[0.22em] px-1.5 py-0.5 rounded-sm border"
-          style={{ borderColor: `${product.fg}55`, color: product.fg }}
-        >
-          {product.streamTag}
-        </span>
-        <span
-          className="font-mono text-[9px] uppercase tracking-[0.22em] tabular-nums"
-          style={{ color: `${product.fg}aa` }}
-        >
-          {String(index + 1).padStart(2, "0")} / 05
-        </span>
-      </div>
-
-      {/* Big formula in centre */}
-      <div className="absolute inset-0 grid place-items-center pt-4 pb-12 px-4">
-        <div className="text-center">
-          <div
-            className="font-display text-2xl sm:text-3xl tracking-tight leading-none"
-            style={{ color: product.fg }}
+        {/* Top bar — stream tag + index */}
+        <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+          <span
+            className="font-mono text-[9px] uppercase tracking-[0.22em] px-1.5 py-0.5 rounded-sm border"
+            style={{ borderColor: `${product.fg}55`, color: product.fg }}
           >
-            {product.formula}
+            {product.streamTag}
+          </span>
+          <span
+            className="font-mono text-[9px] uppercase tracking-[0.22em] tabular-nums"
+            style={{ color: `${product.fg}aa` }}
+          >
+            {String(index + 1).padStart(2, "0")} / 05
+          </span>
+        </div>
+
+        {/* Big formula in centre */}
+        <div className="absolute inset-0 grid place-items-center pt-4 pb-12 px-4">
+          <div className="text-center">
+            <div
+              className="font-display text-2xl sm:text-3xl tracking-tight leading-none"
+              style={{ color: product.fg }}
+            >
+              {product.formula}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Name strip at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 px-3 py-3 sm:py-3.5 backdrop-blur-sm" style={{ background: `${product.fg}12` }}>
-        <div
-          className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-center"
-          style={{ color: product.fg }}
-        >
-          {product.name}
+        {/* Name strip at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 px-3 py-3 sm:py-3.5" style={{ background: `${product.fg}10` }}>
+          <div
+            className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-center"
+            style={{ color: product.fg }}
+          >
+            {product.name}
+          </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Specimen tag flag (visible when active) */}
+      {/* Specimen tag pin — only when active */}
       {isActive && (
         <motion.div
           initial={{ opacity: 0, scaleY: 0 }}
           animate={{ opacity: 1, scaleY: 1 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute -bottom-3 left-1/2 -translate-x-1/2 origin-top"
+          exit={{ opacity: 0, scaleY: 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute -bottom-4 left-1/2 -translate-x-1/2 origin-top pointer-events-none"
         >
-          <div className="w-px h-3 bg-forest" />
+          <div className="w-px h-4 bg-forest" />
         </motion.div>
       )}
     </motion.button>
+  );
+}
+
+function EmptyDatasheet() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="relative rounded-3xl border border-dashed border-line bg-ivory/60 px-8 py-14 sm:py-20"
+    >
+      <div className="absolute inset-0 grain opacity-30 pointer-events-none rounded-3xl" />
+      <div className="relative mx-auto max-w-2xl text-center">
+        <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-muted">
+          Datasheet · awaiting selection
+        </div>
+        <h3 className="mt-4 font-display text-xl sm:text-2xl text-ink leading-snug">
+          Pick a specimen above to view its properties and downstream markets.
+        </h3>
+        <div className="mt-6 flex items-center justify-center gap-2 text-[10px] font-mono uppercase tracking-[0.22em] text-muted/80">
+          {products.map((p, i) => (
+            <span key={p.id} className="flex items-center gap-2">
+              <span
+                className="inline-block h-2 w-2 rounded-full"
+                style={{ background: p.accent }}
+              />
+              <span>{p.streamTag}</span>
+              {i < products.length - 1 && <span className="opacity-50">·</span>}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
