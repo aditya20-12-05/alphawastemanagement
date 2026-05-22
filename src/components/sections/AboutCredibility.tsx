@@ -15,7 +15,7 @@ const items = [
   },
   {
     k: "DSIR-recognised R&D",
-    body: "Government-recognised in-house research centre — third in the Indian steel sector after Tata and Jindal.",
+    body: "Government-recognised in-house research centre (Department of Scientific & Industrial Research, Government of India).",
   },
   {
     k: "CBAM-aligned carbon",

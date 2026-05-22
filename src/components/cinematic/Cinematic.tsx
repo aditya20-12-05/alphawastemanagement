@@ -15,7 +15,7 @@ const PHASES = [
     numeral: "I",
     title: "Input",
     caption:
-      "Industrial waste arrives. About 180 tonnes a month — the hazardous, chromium-bearing fraction from stainless-steel finishing.",
+      "Industrial waste arrives. About 180 tonnes a month — the hazardous, chromium-bearing fraction from steel finishing.",
   },
   {
     key: "segregation",

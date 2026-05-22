@@ -15,15 +15,14 @@ export default function AboutParent() {
           <Reveal className="lg:col-span-7" direction="up">
             <h2 className="font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.25] text-ink">
               Alpha is the recycling venture of{" "}
-              <span className="text-forest">Mangalam Alloys Ltd.</span> — a 38-year stainless-steel
+              <span className="text-forest">Mangalam Alloys Ltd.</span> — a 38-year steel
               manufacturer in Ahmedabad.
             </h2>
 
             <div className="mt-7 space-y-4 text-base text-graphite leading-relaxed max-w-xl">
               <p>
-                Mangalam has spent decades figuring out how to handle steel waste responsibly.
-                Its in-house research centre is government-recognised (DSIR — third in the
-                Indian steel sector, after Tata and Jindal).
+                Mangalam has spent decades figuring out how to handle steel waste responsibly,
+                operating a government-recognised in-house research centre dedicated to it.
               </p>
               <p>
                 Alpha is what comes next: taking the lab work to commercial scale, and offering

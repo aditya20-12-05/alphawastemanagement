@@ -31,7 +31,7 @@ const products = [
     formula: "CaSO₄",
     symbol: "Ca",
     description:
-      "A mineral product (calcium sulphate) recovered from the chemical process — patented route from stainless-steel ETP neutralised sludge.",
+      "A mineral product (calcium sulphate) recovered from the chemical process — patented route from steel ETP neutralised sludge.",
     markets: ["Construction materials", "Industrial mineral applications"],
     properties: [
       { k: "Patent", v: "Granted · Indian" },

@@ -54,7 +54,7 @@ export default function HomeIntro() {
           className="mt-10 max-w-2xl text-base sm:text-lg text-graphite leading-relaxed"
         >
           Alpha Waste Management is the waste-recycling venture of Mangalam Alloys
-          Ltd. — a 38-year-old stainless-steel manufacturer with a government-recognised
+          Ltd. — a 38-year-old steel manufacturer with a government-recognised
           research centre. We recycle industrial waste into recovered metals,
           gypsum, sodium sulphate, metal-oxide powders, and cement-less bricks.
           Pilot scale today; commercial scale-up underway under Government of India

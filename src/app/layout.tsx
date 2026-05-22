@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     "Mangalam Alloys",
     "industrial waste recycling",
     "zero residue",
-    "stainless steel waste",
+    "steel waste",
     "circular economy",
     "hydrometallurgy",
     "cement-less bricks",

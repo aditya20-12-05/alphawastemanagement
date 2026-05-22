@@ -18,7 +18,7 @@ export default function ProcessPage() {
       <PageHero
         eyebrow="Process · Chapter II"
         title="How we recycle."
-        subtitle="Four patented stages take stainless-steel waste and convert it, end-to-end, into saleable output. Nothing is dumped back."
+        subtitle="Four patented stages convert industrial steel waste into saleable output. Nothing is dumped back."
         meta={[
           { label: "Stages", value: "Four" },
           { label: "Mass balance", value: "100%" },

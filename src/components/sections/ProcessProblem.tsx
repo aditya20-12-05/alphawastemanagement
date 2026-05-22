@@ -8,7 +8,7 @@ const grades = [
   { name: "Mild steel", note: "Essentially no added alloying elements", use: "Infrastructure, construction, structural bars", danger: 0 },
   { name: "Carbon steel", note: "Under ~1% chromium", use: "Light engineering applications", danger: 1 },
   { name: "Alloy steel", note: "Alloying in small proportion (< ~10% Cr)", use: "Engineering parts", danger: 2 },
-  { name: "Stainless steel", note: "More than ~10% chromium — Mangalam's core product", use: "Marine, oil & gas, valves, food processing", danger: 4, primary: true },
+  { name: "Stainless steel", note: "More than ~10% chromium", use: "Marine, oil & gas, valves, food processing", danger: 4 },
   { name: "Special / high-alloy", note: "Alloying element exceeds ~50%", use: "Aerospace, high-end applications", danger: 3 },
 ];
 
@@ -28,15 +28,15 @@ export default function ProcessProblem() {
 
         <div className="mt-6 grid lg:grid-cols-12 gap-12 items-end">
           <Reveal className="lg:col-span-7" direction="up">
-            <h2 className="font-display text-[clamp(2rem,5vw,3.75rem)] leading-[1.05] tracking-tight">
-              Stainless steel generates the most difficult waste in the industry.
+            <h2 className="font-display text-[clamp(1.8rem,4vw,3rem)] leading-[1.1] tracking-tight">
+              Steel-making generates waste at every stage.
             </h2>
           </Reveal>
           <Reveal className="lg:col-span-5" direction="left" delay={0.15}>
             <p className="text-base text-graphite leading-relaxed">
-              Steel is fundamentally iron, with different elements added in different
-              proportions. The amount of chromium is what separates the categories —
-              and chromium is also what makes the waste hazardous.
+              Steel is iron with different alloying elements added in different
+              proportions. The amount of chromium and other alloys is what makes
+              certain steel waste hazardous to handle.
             </p>
           </Reveal>
         </div>
