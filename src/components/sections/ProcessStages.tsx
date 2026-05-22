@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent, AnimatePresence } from "motion/react";
-import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const stages = [
@@ -48,52 +48,84 @@ const stages = [
 ];
 
 export default function ProcessStages() {
-  const stickyRef = useRef<HTMLDivElement>(null);
+  /* The <section> must NOT have overflow-hidden — that breaks `position: sticky`
+     on descendants. overflow-hidden is scoped to the inner sticky pane only. */
+  const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(0);
+  const [progressPct, setProgressPct] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: stickyRef,
-    offset: ["start start", "end end"],
-  });
+  useEffect(() => {
+    /* We don't use scroll-event listeners or framer-motion's useScroll —
+       both fail under Lenis's smooth-scroll model (lenis.scrollTo({immediate})
+       doesn't dispatch window scroll events, and ScrollTimeline-based hooks
+       don't trigger either). A continuous rAF loop reading getBoundingClientRect
+       is cheap and correct regardless of how scrolling happens. A 250ms
+       setInterval is a backstop for environments where rAF is throttled. */
+    let raf = 0;
+    let lastIdx = -1;
+    let lastPct = -1;
 
-  // Spring-smoothed progress prevents phase-skip on fast scroll.
-  const smoothed = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.4 });
+    const tick = () => {
+      const el = sectionRef.current;
+      if (!el) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+      const rect = el.getBoundingClientRect();
+      const winH = window.innerHeight;
+      raf = requestAnimationFrame(tick);
+      if (rect.bottom < 0 || rect.top > winH) return;
+      const total = rect.height - winH;
+      if (total <= 0) return;
+      const p = Math.max(0, Math.min(1, -rect.top / total));
+      if (Math.abs(p - lastPct) > 0.003) {
+        lastPct = p;
+        setProgressPct(p);
+      }
+      const idx = Math.min(stages.length - 1, Math.max(0, Math.floor(p * stages.length)));
+      if (idx !== lastIdx) {
+        lastIdx = idx;
+        setActive(idx);
+      }
+    };
 
-  useMotionValueEvent(smoothed, "change", (v) => {
-    const idx = Math.min(stages.length - 1, Math.max(0, Math.floor(v * stages.length)));
-    if (idx !== active) setActive(idx);
-  });
+    raf = requestAnimationFrame(tick);
+    const interval = setInterval(tick, 250);
 
-  const lineX = useTransform(smoothed, [0, 1], ["0%", "100%"]);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
-    <section className="relative bg-forest text-paper overflow-hidden">
-      {/* Faint blueprint grid to break up the dark background */}
-      <BackgroundDetail />
+    // 380vh = ~95vh per stage.
+    <section ref={sectionRef} className="relative" style={{ height: "380vh" }}>
+      <div className="sticky top-0 h-screen overflow-hidden bg-forest text-paper">
+        <BackgroundDetail />
 
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-8 pt-24 sm:pt-28 pb-10">
-        <SectionLabel number="§ 02" title="The Four Stages" variant="dark" />
-        <div className="mt-6 grid lg:grid-cols-12 gap-10 items-end">
-          <div className="lg:col-span-7">
-            <h2 className="font-display text-[clamp(1.7rem,3.6vw,2.6rem)] leading-[1.15] tracking-tight">
-              Four stages, one closed loop.
-            </h2>
+        <div className="relative h-full flex flex-col px-6 sm:px-8">
+          {/* Header pinned through the whole experience */}
+          <div className="pt-24 sm:pt-28 pb-2 max-w-7xl mx-auto w-full">
+            <SectionLabel number="§ 02" title="The Four Stages" variant="dark" />
+            <div className="mt-5 grid lg:grid-cols-12 gap-8 items-end">
+              <div className="lg:col-span-7">
+                <h2 className="font-display text-[clamp(1.6rem,3.4vw,2.4rem)] leading-[1.15] tracking-tight">
+                  Four stages, one closed loop.
+                </h2>
+              </div>
+              <div className="lg:col-span-5">
+                <p className="text-sm text-paper/75 leading-relaxed">
+                  Four sequential stages convert incoming waste into saleable output.
+                  The brick step is patented; recovery and hydromet are protected by
+                  additional filings.
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="lg:col-span-5">
-            <p className="text-sm sm:text-base text-paper/75 leading-relaxed">
-              The process converts incoming waste into saleable output through four
-              sequential stages. The brick-manufacturing step is patented; recovery and
-              hydromet routes are protected by additional filings.
-            </p>
-          </div>
-        </div>
-      </div>
 
-      {/* 320vh = 80vh per stage. Each stage gets a deliberate, controlled scroll. */}
-      <div ref={stickyRef} className="relative" style={{ height: "320vh" }}>
-        <div className="sticky top-0 h-screen flex items-center">
-          <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 py-10">
-            <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="flex-1 max-w-7xl mx-auto w-full flex items-center">
+            <div className="grid lg:grid-cols-12 gap-10 items-center w-full">
               <div className="lg:col-span-5 order-2 lg:order-1">
                 <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-fern/70">
                   Stage {String(active + 1).padStart(2, "0")} / {String(stages.length).padStart(2, "0")}
@@ -101,19 +133,19 @@ export default function ProcessStages() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active}
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -24 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <h3 className="mt-4 font-display text-3xl sm:text-5xl tracking-tight">
+                    <h3 className="mt-3 font-display text-3xl sm:text-5xl tracking-tight leading-[1.05]">
                       {stages[active].title}
                     </h3>
-                    <p className="mt-2 text-lg text-fern italic">{stages[active].short}</p>
-                    <p className="mt-5 text-sm sm:text-base text-paper/80 leading-relaxed max-w-lg">
+                    <p className="mt-2 text-base sm:text-lg text-fern italic">{stages[active].short}</p>
+                    <p className="mt-4 text-sm sm:text-base text-paper/80 leading-relaxed max-w-lg">
                       {stages[active].body}
                     </p>
-                    <div className="mt-7 inline-flex items-center gap-3 px-4 py-2.5 rounded-full glass-forest">
+                    <div className="mt-6 inline-flex items-center gap-3 px-4 py-2.5 rounded-full glass-forest">
                       <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-fern/85">
                         Output →
                       </span>
@@ -127,24 +159,28 @@ export default function ProcessStages() {
                 <StageVisual active={active} />
               </div>
             </div>
+          </div>
 
-            {/* Progress strip — clickable */}
-            <div className="mt-10 sm:mt-14 relative">
+          {/* Progress strip */}
+          <div className="max-w-7xl mx-auto w-full pb-12 sm:pb-14">
+            <div className="relative">
               <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-paper/15" />
-              <motion.div
-                style={{ width: lineX }}
-                className="absolute left-0 top-1/2 -translate-y-1/2 h-px bg-fern"
+              <div
+                className="absolute left-0 top-1/2 -translate-y-1/2 h-px bg-fern transition-[width] duration-200 ease-out"
+                style={{ width: `${progressPct * 100}%` }}
               />
               <div className="relative grid grid-cols-4 gap-2">
                 {stages.map((s, i) => (
                   <button
                     key={s.id}
                     onClick={() => {
-                      const el = stickyRef.current;
+                      const el = sectionRef.current;
                       if (!el) return;
                       const sectionTop = el.offsetTop;
                       const sectionHeight = el.offsetHeight;
-                      const target = sectionTop + (sectionHeight * (i + 0.5)) / stages.length;
+                      const winH = window.innerHeight;
+                      const stageProgress = (i + 0.5) / stages.length;
+                      const target = sectionTop + stageProgress * (sectionHeight - winH);
                       window.scrollTo({ top: target, behavior: "smooth" });
                     }}
                     className="flex flex-col items-center text-center"
@@ -171,6 +207,9 @@ export default function ProcessStages() {
                 ))}
               </div>
             </div>
+            <p className="mt-5 text-center text-[10px] font-mono uppercase tracking-[0.22em] text-paper/50">
+              Scroll to advance · click a stage to jump
+            </p>
           </div>
         </div>
       </div>
@@ -181,10 +220,7 @@ export default function ProcessStages() {
 function BackgroundDetail() {
   return (
     <>
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.04]"
-        preserveAspectRatio="none"
-      >
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.04]" preserveAspectRatio="none">
         <defs>
           <pattern id="proc-grid" width="40" height="40" patternUnits="userSpaceOnUse">
             <path d="M 40 0 L 0 0 0 40" fill="none" stroke={"#F5F1E8"} strokeWidth="0.6" />
@@ -199,7 +235,7 @@ function BackgroundDetail() {
 
 function StageVisual({ active }: { active: number }) {
   return (
-    <div className="relative aspect-square max-w-[480px] mx-auto">
+    <div className="relative aspect-square max-w-[440px] mx-auto">
       <div className="absolute inset-0 rounded-full border border-paper/15" />
       <div className="absolute inset-8 rounded-full border border-paper/10" />
       <div className="absolute inset-16 rounded-full border border-paper/10" />
@@ -225,7 +261,7 @@ function StageVisual({ active }: { active: number }) {
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                className="w-20 h-20 sm:w-28 sm:h-28 rounded-2xl glass-forest grid place-items-center"
+                className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl glass-forest grid place-items-center"
               >
                 <div className="text-center">
                   <div className="font-display text-2xl sm:text-3xl text-fern">0{s.id}</div>
@@ -246,11 +282,11 @@ function StageVisual({ active }: { active: number }) {
             initial={{ scale: 0.7, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 1.2, opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="text-center"
           >
             <div
-              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full grid place-items-center"
+              className="w-32 h-32 sm:w-36 sm:h-36 rounded-full grid place-items-center"
               style={{
                 background: `radial-gradient(circle, ${stages[active].color}cc 0%, ${stages[active].color}22 60%, transparent 80%)`,
               }}

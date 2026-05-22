@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useScroll, useSpring, useMotionValueEvent, AnimatePresence } from "motion/react";
-import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { useRef } from "react";
+import { useSectionProgress } from "@/components/ui/useSectionProgress";
 
 /* --------------------------------------------------------------------------
    ALPHA · PROCESS FLOW DIAGRAM (PFD-001)
@@ -56,18 +57,8 @@ const CAMERAS = [
 
 export default function Cinematic() {
   const ref = useRef<HTMLElement>(null);
-  const [activePhase, setActivePhase] = useState(0);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-
-  const smoothed = useSpring(scrollYProgress, { stiffness: 90, damping: 26, mass: 0.4 });
-
-  useMotionValueEvent(smoothed, "change", (v) => {
-    const idx = Math.min(PHASES.length - 1, Math.max(0, Math.floor(v * PHASES.length)));
-    if (idx !== activePhase) setActivePhase(idx);
-  });
+  const progress = useSectionProgress(ref);
+  const activePhase = Math.min(PHASES.length - 1, Math.max(0, Math.floor(progress * PHASES.length)));
 
   return (
     <section ref={ref} className="relative" style={{ height: "800vh" }}>
