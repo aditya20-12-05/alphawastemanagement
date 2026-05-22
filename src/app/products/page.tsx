@@ -16,19 +16,8 @@ export default function ProductsPage() {
     <main className="relative">
       <PageHero
         eyebrow="Products · Chapter III"
-        title={
-          <>
-            Five output streams. Each in <span className="text-forest italic">industrial demand</span>.
-          </>
-        }
-        intro={
-          <p>
-            Every product from the process has a market. The principle is that no
-            stream of incoming waste leaves Alpha as a residue — each becomes a
-            saleable output, either re-used in steel-making or sold to its respective
-            downstream market.
-          </p>
-        }
+        title="What we produce."
+        subtitle="Five output streams come out of the process — every one of them with an existing industrial market."
         meta={[
           { label: "Streams", value: "Five" },
           { label: "Brick strength", value: "19–20 kg/sq mm" },

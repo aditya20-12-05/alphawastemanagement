@@ -18,20 +18,8 @@ export default function FuturePage() {
     <main className="relative">
       <PageHero
         eyebrow="Future · Chapter IV"
-        title={
-          <>
-            A waste-to-value platform — built for <span className="text-forest italic">regional scale</span>.
-          </>
-        }
-        intro={
-          <p>
-            Alpha is a platform, not a single product. The R&amp;D pipeline extends well
-            beyond steel waste, and the commercial plan deploys regional recycling hubs
-            across India&apos;s producing regions. The context — waste norms tightening,
-            carbon mechanisms rewarding low-carbon processing, natural aggregates
-            depleting — is favourable.
-          </p>
-        }
+        title="Where we're going."
+        subtitle="A platform, not a single product. Regional recycling hubs across India and an R&D pipeline that extends well beyond steel waste."
         meta={[
           { label: "Phase 1 capacity", value: "2,000 MT" },
           { label: "Pipeline projects", value: "Nine" },

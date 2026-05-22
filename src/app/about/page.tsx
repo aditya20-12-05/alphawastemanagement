@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import PageFooter from "@/components/ui/PageFooter";
-import AboutMangalam from "@/components/sections/AboutMangalam";
-import AboutResearch from "@/components/sections/AboutResearch";
-import AboutPatents from "@/components/sections/AboutPatents";
-import AboutCredentials from "@/components/sections/AboutCredentials";
+import AboutWhatIs from "@/components/sections/AboutWhatIs";
+import AboutParent from "@/components/sections/AboutParent";
+import AboutCredibility from "@/components/sections/AboutCredibility";
 import NextPageCTA from "@/components/ui/NextPageCTA";
 
 export const metadata: Metadata = {
-  title: "About Alpha — Mangalam Alloys, R&D and patents",
+  title: "About Alpha — Industrial waste, turned into revenue",
   description:
-    "Alpha Waste Management is a venture of Mangalam Alloys Ltd. A 38-year operation, a DSIR-recognised research centre, three decades of waste-management work, and a portfolio of granted patents.",
+    "Alpha Waste Management collects industrial waste and recycles it into sellable products — recovered metals, gypsum, sodium sulphate, metal oxides, and cement-less bricks.",
 };
 
 export default function AboutPage() {
@@ -18,33 +17,23 @@ export default function AboutPage() {
     <main className="relative">
       <PageHero
         eyebrow="About · Chapter I"
-        title={
-          <>
-            A venture grounded in <span className="text-forest italic">three decades</span> of work on industrial waste.
-          </>
-        }
-        intro={
-          <p>
-            Alpha Waste Management is the commercial expression of a long-running, government-recognised research
-            programme. The credibility behind the venture is the parent company, the R&amp;D centre, and the patents.
-          </p>
-        }
+        title="About Alpha."
+        subtitle="A new waste-recycling venture that takes industrial waste from steel plants and turns it into sellable products — with nothing dumped back."
         meta={[
-          { label: "Parent", value: "Mangalam Alloys" },
-          { label: "Operating since", value: "1988" },
-          { label: "R&D recognition", value: "DSIR · 2016" },
-          { label: "Granted patents", value: "Seven" },
+          { label: "Pilot today", value: "180 MT/mo" },
+          { label: "Patents granted", value: "Seven" },
+          { label: "PLI", value: "Approved" },
+          { label: "Backed by", value: "38-yr parent" },
         ]}
       />
-      <AboutMangalam />
-      <AboutResearch />
-      <AboutPatents />
-      <AboutCredentials />
+      <AboutWhatIs />
+      <AboutParent />
+      <AboutCredibility />
       <NextPageCTA
         href="/process"
         meta="Chapter II"
-        title="The Process"
-        body="How patented stages convert hazardous waste into saleable output."
+        title="See the process."
+        body="Four patented stages turn hazardous waste into saleable output."
       />
       <PageFooter />
     </main>

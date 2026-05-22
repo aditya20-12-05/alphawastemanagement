@@ -6,19 +6,20 @@ import { ReactNode } from "react";
 interface Props {
   eyebrow: string;
   title: ReactNode;
+  subtitle?: ReactNode;
   intro?: ReactNode;
   meta?: { label: string; value: string }[];
 }
 
-export default function PageHero({ eyebrow, title, intro, meta }: Props) {
+export default function PageHero({ eyebrow, title, subtitle, intro, meta }: Props) {
   return (
-    <section className="relative pt-36 sm:pt-44 pb-16 sm:pb-24 overflow-hidden">
+    <section className="relative pt-32 sm:pt-36 pb-12 sm:pb-16 overflow-hidden">
       <div className="absolute inset-0 paper opacity-50 pointer-events-none" />
       <div className="grain" />
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] font-mono text-muted"
@@ -28,20 +29,31 @@ export default function PageHero({ eyebrow, title, intro, meta }: Props) {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-8 font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.95] tracking-tight text-ink max-w-5xl"
+          transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-6 font-display text-[clamp(1.9rem,4.2vw,3.4rem)] leading-[1.05] tracking-tight text-ink max-w-3xl"
         >
           {title}
         </motion.h1>
 
+        {subtitle && (
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.18 }}
+            className="mt-5 max-w-2xl text-base sm:text-lg text-graphite leading-relaxed"
+          >
+            {subtitle}
+          </motion.p>
+        )}
+
         {intro && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25 }}
-            className="mt-10 max-w-2xl text-lg text-graphite leading-relaxed"
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="mt-4 max-w-2xl text-sm text-muted leading-relaxed"
           >
             {intro}
           </motion.div>
@@ -49,17 +61,17 @@ export default function PageHero({ eyebrow, title, intro, meta }: Props) {
 
         {meta && meta.length > 0 && (
           <motion.dl
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4 }}
-            className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-6 pt-8 border-t border-line max-w-4xl"
+            transition={{ duration: 0.7, delay: 0.35 }}
+            className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-5 pt-7 border-t border-line max-w-4xl"
           >
             {meta.map((m) => (
               <div key={m.label}>
                 <dt className="text-[10px] uppercase tracking-[0.22em] font-mono text-muted">
                   {m.label}
                 </dt>
-                <dd className="mt-2 font-display text-2xl text-forest tabular-nums">
+                <dd className="mt-1.5 font-display text-xl text-forest tabular-nums">
                   {m.value}
                 </dd>
               </div>

@@ -21,7 +21,7 @@ export default function HomeIntro() {
         </motion.div>
 
         <h1 className="mt-10 font-display text-[clamp(2.8rem,8vw,7rem)] leading-[0.95] tracking-tight max-w-6xl">
-          {["Industrial", "waste,", "processed"].map((w, i) => (
+          {["Industry", "waste"].map((w, i) => (
             <motion.span
               key={w + i}
               initial={{ opacity: 0, y: 60 }}
@@ -33,12 +33,12 @@ export default function HomeIntro() {
             </motion.span>
           ))}
           <span className="block">
-            {["to", "zero", "residue."].map((w, i) => (
+            {["turned", "into", "revenue."].map((w, i) => (
               <motion.span
                 key={w + i}
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, delay: 0.55 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.9, delay: 0.5 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
                 className="inline-block mr-[0.25em] text-forest"
               >
                 {w}

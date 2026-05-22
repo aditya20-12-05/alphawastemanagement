@@ -16,19 +16,8 @@ export default function PartnerPage() {
     <main className="relative">
       <PageHero
         eyebrow="Partner · Chapter V"
-        title={
-          <>
-            Five ways to engage. <span className="text-forest italic">One core process.</span>
-          </>
-        }
-        intro={
-          <p>
-            Alpha&apos;s core model is to collect waste metal from industry, apply its
-            patented processes, and sell the resulting products. Around that core, partners
-            can engage in the way that best matches their constraints — from contracted
-            collection to international technology synergy.
-          </p>
-        }
+        title="Work with us."
+        subtitle="Five engagement models around one core process — pick the one that fits your constraints."
         meta={[
           { label: "Engagement modes", value: "Five" },
           { label: "Partnership terms", value: "MOU + equity" },

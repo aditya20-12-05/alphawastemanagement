@@ -17,18 +17,8 @@ export default function ProcessPage() {
     <main className="relative">
       <PageHero
         eyebrow="Process · Chapter II"
-        title={
-          <>
-            Whatever comes in as waste leaves as a <span className="text-forest italic">finished product</span>.
-          </>
-        }
-        intro={
-          <p>
-            100% mass balance — including the chromium. Nothing is dumped back. The process
-            is already running at pilot scale inside Mangalam, processing approximately
-            180 tonnes a month through patented stages.
-          </p>
-        }
+        title="How we recycle."
+        subtitle="Four patented stages take stainless-steel waste and convert it, end-to-end, into saleable output. Nothing is dumped back."
         meta={[
           { label: "Stages", value: "Four" },
           { label: "Mass balance", value: "100%" },
