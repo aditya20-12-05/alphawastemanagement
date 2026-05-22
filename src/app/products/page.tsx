@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import PageFooter from "@/components/ui/PageFooter";
-import ProductsList from "@/components/sections/ProductsList";
+import ProductsShowcase from "@/components/sections/ProductsShowcase";
 import ProductsBrickFocus from "@/components/sections/ProductsBrickFocus";
 import NextPageCTA from "@/components/ui/NextPageCTA";
 
@@ -25,7 +25,7 @@ export default function ProductsPage() {
           { label: "Approved use", value: "Homes · blocks" },
         ]}
       />
-      <ProductsList />
+      <ProductsShowcase />
       <ProductsBrickFocus />
       <NextPageCTA
         href="/future"
