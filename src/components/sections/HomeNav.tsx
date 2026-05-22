@@ -7,7 +7,7 @@ import Link from "next/link";
 const tiles = [
   {
     href: "/about",
-    title: "About Alpha",
+    title: "About",
     meta: "Chapter I",
     body:
       "What Alpha is, who's behind it, and why it's credible. The parent company, the R&D centre, the patents — in short.",
@@ -15,7 +15,7 @@ const tiles = [
   },
   {
     href: "/process",
-    title: "The process",
+    title: "Process",
     meta: "Chapter II",
     body:
       "Four patented stages: segregation, metal recovery, hydrometallurgy, and cement-less brick manufacturing.",
@@ -23,7 +23,7 @@ const tiles = [
   },
   {
     href: "/products",
-    title: "Output streams",
+    title: "Products",
     meta: "Chapter III",
     body:
       "Recovered metals, gypsum, sodium sulphate, metal-oxide powders, and bricks. Every stream with an industrial buyer.",
@@ -31,7 +31,7 @@ const tiles = [
   },
   {
     href: "/future",
-    title: "The direction",
+    title: "Future",
     meta: "Chapter IV",
     body:
       "Regional recycling hubs across India. Nine in-flight R&D projects beyond steel waste.",
@@ -39,7 +39,7 @@ const tiles = [
   },
   {
     href: "/partner",
-    title: "Work with us",
+    title: "Partner",
     meta: "Chapter V",
     body:
       "Five ways to engage — MOU collection, on-site co-processing, investment, licensing, and international synergy.",

@@ -61,7 +61,9 @@ export default function Cinematic() {
   const activePhase = Math.min(PHASES.length - 1, Math.max(0, Math.floor(progress * PHASES.length)));
 
   return (
-    <section ref={ref} className="relative" style={{ height: "800vh" }}>
+    /* 360vh = ~90vh per phase. Now that scroll tracking is reliable
+       (rAF-based), each phase only needs ~one viewport of scroll. */
+    <section ref={ref} className="relative" style={{ height: "360vh" }}>
       <div className="sticky top-0 h-screen overflow-hidden bg-paper">
         <BlueprintGrid />
         <div className="absolute inset-0 grain opacity-25 pointer-events-none" />
