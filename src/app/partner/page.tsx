@@ -16,12 +16,6 @@ export default function PartnerPage() {
         eyebrow="Partner · Chapter IV"
         title="Work with us."
         subtitle="Five engagement models around one core process. Pick the one that fits your constraints."
-        meta={[
-          { label: "Engagement modes", value: "Five" },
-          { label: "Partnership terms", value: "MOU + equity" },
-          { label: "PLI status", value: "Approved" },
-          { label: "Response time", value: "≤ 2 days" },
-        ]}
       />
       <PartnerEngagement />
       <PageFooter />
