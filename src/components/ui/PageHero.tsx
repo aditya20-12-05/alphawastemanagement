@@ -9,15 +9,27 @@ interface Props {
   subtitle?: ReactNode;
   intro?: ReactNode;
   meta?: { label: string; value: string }[];
+  /**
+   * When true, the hero takes a full viewport height and the content is
+   * vertically centred — useful on pages where you want the heading to be
+   * the only thing visible above the fold.
+   */
+  fillViewport?: boolean;
 }
 
-export default function PageHero({ eyebrow, title, subtitle, intro, meta }: Props) {
+export default function PageHero({ eyebrow, title, subtitle, intro, meta, fillViewport }: Props) {
   return (
-    <section className="relative pt-32 sm:pt-36 pb-12 sm:pb-16 overflow-hidden">
+    <section
+      className={`relative overflow-hidden ${
+        fillViewport
+          ? "min-h-[100svh] flex items-center pt-28 pb-16"
+          : "pt-32 sm:pt-36 pb-12 sm:pb-16"
+      }`}
+    >
       <div className="absolute inset-0 paper opacity-50 pointer-events-none" />
       <div className="grain" />
 
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-8 text-center">
+      <div className="relative mx-auto max-w-7xl w-full px-6 sm:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -80,6 +92,22 @@ export default function PageHero({ eyebrow, title, subtitle, intro, meta }: Prop
           </motion.dl>
         )}
       </div>
+
+      {fillViewport && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 inline-flex flex-col items-center gap-2 text-[10px] uppercase tracking-[0.28em] font-mono text-muted"
+        >
+          <span>Scroll to engage</span>
+          <motion.span
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            className="block h-6 w-px bg-gradient-to-b from-muted to-transparent"
+          />
+        </motion.div>
+      )}
     </section>
   );
 }

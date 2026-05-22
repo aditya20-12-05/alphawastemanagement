@@ -16,6 +16,7 @@ export default function PartnerPage() {
         eyebrow="Partner · Chapter IV"
         title="Work with us."
         subtitle="Five engagement models around one core process. Pick the one that fits your constraints."
+        fillViewport
       />
       <PartnerEngagement />
       <PageFooter />
