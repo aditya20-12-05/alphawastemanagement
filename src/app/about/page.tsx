@@ -9,7 +9,7 @@ import NextPageCTA from "@/components/ui/NextPageCTA";
 export const metadata: Metadata = {
   title: "About Alpha · Industry waste turned into revenue",
   description:
-    "Alpha Waste Management collects industrial waste and recycles it into sellable products: recovered metals, gypsum, sodium sulphate, metal oxides, and cement-less bricks.",
+    "Alpha Waste Management valorizes industrial steel waste into sellable products: recovered metals, gypsum, sodium sulphate, metal oxides, and cement-less bricks. We don't recycle our slag, we valorize it.",
 };
 
 export default function AboutPage() {
@@ -18,7 +18,12 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About · Chapter I"
         title="About Alpha."
-        subtitle="A new waste-recycling venture that takes industrial waste from steel plants and turns it into sellable products, with nothing dumped back."
+        subtitle={
+          <>
+            We don&apos;t recycle our slag.{" "}
+            <span className="text-forest italic">We valorize it into saleable oxides.</span>
+          </>
+        }
         meta={[
           { label: "Pilot today", value: "180 MT/mo" },
           { label: "Patents granted", value: "Seven" },

@@ -28,7 +28,7 @@ export default function AboutParent() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.25] text-ink"
         >
-          Alpha is the recycling venture of{" "}
+          Alpha is the valorization venture of{" "}
           <span className="text-forest">Mangalam Alloys Ltd.</span>, a 38-year steel
           manufacturer in Ahmedabad.
         </motion.h2>

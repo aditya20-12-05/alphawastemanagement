@@ -17,9 +17,9 @@ export default function AboutWhatIs() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mt-6 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.25] text-ink"
         >
-          Alpha collects industrial steel waste and recycles it into things other
-          industries want to buy, with{" "}
-          <span className="text-forest italic">zero residue</span> at the end.
+          Alpha collects industrial steel waste and{" "}
+          <span className="text-forest italic">valorizes</span> it into saleable
+          products, with zero residue at the end.
         </motion.h2>
 
         <motion.div

@@ -56,7 +56,7 @@ export default function PageFooter() {
               </span>
             </Link>
             <p className="mt-5 text-sm text-paper/65 max-w-sm leading-relaxed">
-              A waste-recycling venture of Mangalam Alloys Ltd. Operating at pilot scale today.
+              A waste-valorization venture of Mangalam Alloys Ltd. Operating at pilot scale today.
               Government of India PLI approval secured for commercial scale-up.
             </p>
 
