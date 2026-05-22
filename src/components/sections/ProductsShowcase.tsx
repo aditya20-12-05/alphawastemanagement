@@ -112,7 +112,7 @@ export default function ProductsShowcase() {
         <div className="mt-6 grid lg:grid-cols-12 gap-10 items-end">
           <Reveal className="lg:col-span-7" direction="up">
             <h2 className="font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.2] text-ink">
-              Five output streams. <span className="italic text-forest">Click a specimen for the spec sheet.</span>
+              Five output streams.
             </h2>
           </Reveal>
           <Reveal className="lg:col-span-5" direction="left" delay={0.1}>
