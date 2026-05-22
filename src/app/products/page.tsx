@@ -28,10 +28,10 @@ export default function ProductsPage() {
       <ProductsShowcase />
       <ProductsBrickFocus />
       <NextPageCTA
-        href="/future"
+        href="/partner"
         meta="Chapter IV"
-        title="The Direction"
-        body="Regional hubs across India, a nine-project R&D pipeline, and the macro context for zero-residue recycling."
+        title="Partner with us."
+        body="Five ways to engage — MOU collection, on-site co-processing, investment, licensing, and international technology synergy."
       />
       <PageFooter />
     </main>

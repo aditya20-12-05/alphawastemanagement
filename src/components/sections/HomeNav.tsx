@@ -30,20 +30,12 @@ const tiles = [
     accent: "#2F4E3E",
   },
   {
-    href: "/future",
-    title: "Future",
-    meta: "Chapter IV",
-    body:
-      "Regional recycling hubs across India. Nine in-flight R&D projects beyond steel waste.",
-    accent: "#4A7C4E",
-  },
-  {
     href: "/partner",
     title: "Partner",
-    meta: "Chapter V",
+    meta: "Chapter IV",
     body:
       "Five ways to engage — MOU collection, on-site co-processing, investment, licensing, and international synergy.",
-    accent: "#8B4A2A",
+    accent: "#4A7C4E",
   },
 ];
 

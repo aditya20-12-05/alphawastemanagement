@@ -14,7 +14,7 @@ export default function PartnerPage() {
   return (
     <main className="relative">
       <PageHero
-        eyebrow="Partner · Chapter V"
+        eyebrow="Partner · Chapter IV"
         title="Work with us."
         subtitle="Five engagement models around one core process — pick the one that fits your constraints."
         meta={[
