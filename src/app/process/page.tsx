@@ -7,7 +7,7 @@ import ProcessPilot from "@/components/sections/ProcessPilot";
 import NextPageCTA from "@/components/ui/NextPageCTA";
 
 export const metadata: Metadata = {
-  title: "The Process — Alpha Waste Management",
+  title: "The Process. Alpha Waste Management",
   description:
     "Four patented stages turning industrial waste into saleable output: metal segregation, metal recovery, hydrometallurgy, and cement-less brick manufacturing. 100% mass balance.",
 };
@@ -17,7 +17,7 @@ export default function ProcessPage() {
     <main className="relative">
       <PageHero
         eyebrow="Process · Chapter II"
-        title="How we recycle."
+        title="How we do it."
         subtitle="Four patented stages convert industrial steel waste into saleable output. Nothing is dumped back."
         meta={[
           { label: "Stages", value: "Four" },
@@ -33,7 +33,7 @@ export default function ProcessPage() {
         href="/products"
         meta="Chapter III"
         title="The Products"
-        body="Five output streams — recovered metals, gypsum, sodium sulphate, metal-oxide powders, and cement-less bricks."
+        body="Five output streams: recovered metals, gypsum, sodium sulphate, metal-oxide powders, and cement-less bricks."
       />
       <PageFooter />
     </main>

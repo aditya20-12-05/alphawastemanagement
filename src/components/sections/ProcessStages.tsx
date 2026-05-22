@@ -11,7 +11,7 @@ const stages = [
     title: "Metal segregation",
     short: "Sort the incoming waste.",
     body:
-      "Incoming waste is sorted. Fine metal particles are separated out and re-used directly as raw material — sent straight back to the melting shop.",
+      "Incoming waste is sorted. Fine metal particles are separated out and re-used directly as raw material, sent straight back to the melting shop.",
     output: "Reusable metal fines",
     color: "#0E2F23",
   },
@@ -21,7 +21,7 @@ const stages = [
     title: "Metal recovery",
     short: "Extract metal from dust.",
     body:
-      "What remains is largely a metallic dust — a mix of oxides and metal. A dedicated process separates the oxides and recovers the metal.",
+      "What remains is largely a metallic dust, a mix of oxides and metal. A dedicated process separates the oxides and recovers the metal.",
     output: "Recovered metal + oxides",
     color: "#1F3A2E",
   },
@@ -31,7 +31,7 @@ const stages = [
     title: "Hydrometallurgy",
     short: "Chemistry extracts value.",
     body:
-      "A chemical route extracts valuable elements and separates them into distinct outputs — gypsum, sodium sulphate, and metal oxides such as iron, chromium and nickel oxide.",
+      "A chemical route extracts valuable elements and separates them into distinct outputs: gypsum, sodium sulphate, and metal oxides such as iron, chromium and nickel oxide.",
     output: "Gypsum · Na₂SO₄ · metal oxides",
     color: "#2F4E3E",
   },
@@ -41,7 +41,7 @@ const stages = [
     title: "Brick manufacturing",
     short: "Residue becomes structure.",
     body:
-      "The remaining fine metal dust is turned into cement-less bricks — with metal waste replacing cement. Patented. Compressive strength 19–20 kg/sq mm, vs ~8.5 for conventional fly-ash bricks.",
+      "The remaining fine metal dust is turned into cement-less bricks, with metal waste replacing cement. Patented. Compressive strength 19–20 kg/sq mm, vs ~8.5 for conventional fly-ash bricks.",
     output: "Cement-less bricks",
     color: "#4A7C4E",
   },
@@ -106,22 +106,16 @@ export default function ProcessStages() {
 
         <div className="relative h-full flex flex-col px-6 sm:px-8">
           {/* Header pinned through the whole experience */}
-          <div className="pt-24 sm:pt-28 pb-2 max-w-7xl mx-auto w-full">
+          <div className="pt-24 sm:pt-28 pb-2 max-w-3xl mx-auto w-full text-center">
             <SectionLabel number="§ 02" title="The Four Stages" variant="dark" />
-            <div className="mt-5 grid lg:grid-cols-12 gap-8 items-end">
-              <div className="lg:col-span-7">
-                <h2 className="font-display text-[clamp(1.6rem,3.4vw,2.4rem)] leading-[1.15] tracking-tight">
-                  Four stages, one closed loop.
-                </h2>
-              </div>
-              <div className="lg:col-span-5">
-                <p className="text-sm text-paper/75 leading-relaxed">
-                  Four sequential stages convert incoming waste into saleable output.
-                  The brick step is patented; recovery and hydromet are protected by
-                  additional filings.
-                </p>
-              </div>
-            </div>
+            <h2 className="mt-5 font-display text-[clamp(1.6rem,3.4vw,2.4rem)] leading-[1.15] tracking-tight">
+              Four stages, one closed loop.
+            </h2>
+            <p className="mt-4 text-sm text-paper/75 leading-relaxed mx-auto max-w-xl">
+              Four sequential stages convert incoming waste into saleable output.
+              The brick step is patented; recovery and hydromet are protected by
+              additional filings.
+            </p>
           </div>
 
           <div className="flex-1 max-w-7xl mx-auto w-full flex items-center">

@@ -10,7 +10,7 @@ const tiles = [
     title: "About",
     meta: "Chapter I",
     body:
-      "What Alpha is, who's behind it, and why it's credible. The parent company, the R&D centre, the patents — in short.",
+      "What Alpha is, who's behind it, and why it's credible. The parent company, the R&D centre, the patents, in short.",
     accent: "#0E2F23",
   },
   {
@@ -34,7 +34,7 @@ const tiles = [
     title: "Partner",
     meta: "Chapter IV",
     body:
-      "Five ways to engage — MOU collection, on-site co-processing, investment, licensing, and international synergy.",
+      "Five ways to engage: MOU collection, on-site co-processing, investment, licensing, and international synergy.",
     accent: "#4A7C4E",
   },
 ];
@@ -61,18 +61,19 @@ export default function HomeNav() {
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center bg-paper">
         <div className="absolute inset-0 grain opacity-50 pointer-events-none" />
 
-        <div className="relative z-10 mx-auto max-w-7xl w-full px-6 sm:px-8 pt-24 sm:pt-28">
+        <div className="relative z-10 mx-auto max-w-3xl w-full px-6 sm:px-8 pt-24 sm:pt-28 text-center">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] font-mono text-muted"
+            className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] font-mono text-muted"
           >
             <span className="h-px w-10 bg-forest" />
             Continue reading
+            <span className="h-px w-10 bg-forest" />
           </motion.div>
-          <h2 className="mt-3 font-display text-[clamp(1.6rem,3.5vw,2.8rem)] leading-[1.1] tracking-tight max-w-2xl">
-            The full picture in five chapters.
+          <h2 className="mt-3 font-display text-[clamp(1.6rem,3.5vw,2.8rem)] leading-[1.1] tracking-tight mx-auto max-w-2xl">
+            The full picture in four chapters.
           </h2>
         </div>
 

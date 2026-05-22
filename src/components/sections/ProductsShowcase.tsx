@@ -13,7 +13,7 @@ const products = [
     formula: "Fe / Cr / Ni",
     symbol: "Fe",
     description:
-      "Metal extracted from waste — directly re-used fine particles, plus metal recovered from dust and oxides through dedicated separation routes.",
+      "Metal extracted from waste: directly re-used fine particles, plus metal recovered from dust and oxides through dedicated separation routes.",
     markets: ["Steel-making feed", "Secondary metal markets"],
     properties: [
       { k: "Form", v: "Fines + recovered" },
@@ -31,7 +31,7 @@ const products = [
     formula: "CaSO₄",
     symbol: "Ca",
     description:
-      "A mineral product (calcium sulphate) recovered from the chemical process — patented route from steel ETP neutralised sludge.",
+      "A mineral product (calcium sulphate) recovered from the chemical process. Patented route from steel ETP neutralised sludge.",
     markets: ["Construction materials", "Industrial mineral applications"],
     properties: [
       { k: "Patent", v: "Granted · Indian" },
@@ -49,7 +49,7 @@ const products = [
     formula: "Na₂SO₄",
     symbol: "Na",
     description:
-      "A salt recovered from the process. Alpha is developing it into an organic fertilizer — converting a recovery stream into agricultural value.",
+      "A salt recovered from the process. Alpha is developing it into an organic fertilizer, converting a recovery stream into agricultural value.",
     markets: ["Industrial chemistry", "Organic fertilizer (in development)"],
     properties: [
       { k: "Route", v: "Hydrometallurgy" },
@@ -85,7 +85,7 @@ const products = [
     formula: "19–20 kg/sq mm",
     symbol: "B",
     description:
-      "Made from residual metal dust — with metal waste replacing cement. Patented. Compressive strength markedly higher than conventional fly-ash bricks at ~8.5 kg/sq mm.",
+      "Made from residual metal dust, with metal waste replacing cement. Patented. Compressive strength markedly higher than conventional fly-ash bricks at ~8.5 kg/sq mm.",
     markets: ["Homes & partition walls", "Parking lots, pre-cast walls, hollow blocks"],
     properties: [
       { k: "Patent", v: "Granted · Indian" },
@@ -109,18 +109,17 @@ export default function ProductsShowcase() {
       <div className="absolute inset-0 grain opacity-40" />
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
-        <SectionLabel number="§ 01" title="The Five Streams" />
-
-        <div className="mt-6 grid lg:grid-cols-12 gap-10 items-end">
-          <Reveal className="lg:col-span-7" direction="up">
-            <h2 className="font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.2] text-ink">
+        <div className="mx-auto max-w-3xl text-center">
+          <SectionLabel number="§ 01" title="The Five Streams" />
+          <Reveal direction="up">
+            <h2 className="mt-6 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.2] text-ink">
               Five output streams.
             </h2>
           </Reveal>
-          <Reveal className="lg:col-span-5" direction="left" delay={0.1}>
-            <p className="text-base text-graphite leading-relaxed">
+          <Reveal direction="up" delay={0.1}>
+            <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl">
               Each card below represents one output of the process. Tap or click to see
-              its full datasheet — what it is, the route that produces it, and where it goes.
+              its full datasheet: what it is, the route that produces it, and where it goes.
             </p>
           </Reveal>
         </div>

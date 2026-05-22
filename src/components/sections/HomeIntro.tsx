@@ -9,18 +9,19 @@ export default function HomeIntro() {
       <div className="absolute inset-0 paper opacity-60 pointer-events-none" />
       <div className="grain" />
 
-      <div className="relative mx-auto max-w-7xl w-full px-6 sm:px-8">
+      <div className="relative mx-auto max-w-7xl w-full px-6 sm:px-8 text-center">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] font-mono text-muted"
+          className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] font-mono text-muted"
         >
           <span className="h-px w-10 bg-forest" />
           A Mangalam Alloys Ltd. venture · Ahmedabad, Gujarat
+          <span className="h-px w-10 bg-forest" />
         </motion.div>
 
-        <h1 className="mt-10 font-display text-[clamp(2.8rem,8vw,7rem)] leading-[0.95] tracking-tight max-w-6xl">
+        <h1 className="mt-10 font-display text-[clamp(2.8rem,8vw,7rem)] leading-[0.95] tracking-tight mx-auto max-w-6xl">
           {["Industry", "waste"].map((w, i) => (
             <motion.span
               key={w + i}
@@ -51,10 +52,10 @@ export default function HomeIntro() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.0 }}
-          className="mt-10 max-w-2xl text-base sm:text-lg text-graphite leading-relaxed"
+          className="mt-10 mx-auto max-w-2xl text-base sm:text-lg text-graphite leading-relaxed"
         >
           Alpha Waste Management is the waste-recycling venture of Mangalam Alloys
-          Ltd. — a 38-year-old steel manufacturer with a government-recognised
+          Ltd., a 38-year-old steel manufacturer with a government-recognised
           research centre. We recycle industrial waste into recovered metals,
           gypsum, sodium sulphate, metal-oxide powders, and cement-less bricks.
           Pilot scale today; commercial scale-up underway under Government of India
@@ -65,7 +66,7 @@ export default function HomeIntro() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.15 }}
-          className="mt-12 flex flex-wrap items-center gap-3"
+          className="mt-12 flex flex-wrap items-center justify-center gap-3"
         >
           <Link
             href="/process"
@@ -87,7 +88,7 @@ export default function HomeIntro() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.6 }}
-          className="mt-20 flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] font-mono text-muted"
+          className="mt-20 inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.28em] font-mono text-muted"
         >
           <span>Scroll for the venture in motion</span>
           <motion.div

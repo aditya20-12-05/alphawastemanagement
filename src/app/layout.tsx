@@ -24,9 +24,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alpha Waste Management — Turning industrial waste into a revenue stream",
+  title: "Alpha Waste Management · Industry waste turned into revenue",
   description:
-    "A Mangalam Alloys Ltd. venture. Patented zero-residue recycling for industrial steel waste — 100% mass balance, commercial scale, regional hubs across India.",
+    "A Mangalam Alloys Ltd. venture. Patented zero-residue recycling for industrial steel waste. 100% mass balance, commercial scale, regional hubs across India.",
   keywords: [
     "Alpha Waste Management",
     "Mangalam Alloys",

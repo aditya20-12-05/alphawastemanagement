@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import PageFooter from "@/components/ui/PageFooter";
 import ProductsShowcase from "@/components/sections/ProductsShowcase";
-import ProductsBrickFocus from "@/components/sections/ProductsBrickFocus";
 import NextPageCTA from "@/components/ui/NextPageCTA";
 
 export const metadata: Metadata = {
-  title: "Output Streams — Alpha Waste Management",
+  title: "Output Streams. Alpha Waste Management",
   description:
     "Five output streams from Alpha's recycling process: recovered metals, gypsum, sodium sulphate, metal-oxide powders, and patented cement-less bricks.",
 };
@@ -17,7 +16,7 @@ export default function ProductsPage() {
       <PageHero
         eyebrow="Products · Chapter III"
         title="What we produce."
-        subtitle="Five output streams come out of the process — every one of them with an existing industrial market."
+        subtitle="Five output streams come out of the process. Every one of them has an existing industrial market."
         meta={[
           { label: "Streams", value: "Five" },
           { label: "Brick strength", value: "19–20 kg/sq mm" },
@@ -26,12 +25,11 @@ export default function ProductsPage() {
         ]}
       />
       <ProductsShowcase />
-      <ProductsBrickFocus />
       <NextPageCTA
         href="/partner"
         meta="Chapter IV"
         title="Partner with us."
-        body="Five ways to engage — MOU collection, on-site co-processing, investment, licensing, and international technology synergy."
+        body="Five ways to engage: MOU collection, on-site co-processing, investment, licensing, and international technology synergy."
       />
       <PageFooter />
     </main>

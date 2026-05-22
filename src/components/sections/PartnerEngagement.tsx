@@ -12,7 +12,7 @@ const models = [
     note: "We handle your plant's waste year-round.",
     headline: "Year-round, regulation-ready.",
     body:
-      "A steel plant signs an MOU with Alpha. We handle that plant's waste year-round — removing the dumping cost, the seasonal disruption, and the regulatory burden.",
+      "A steel plant signs an MOU with Alpha. We handle that plant's waste year-round, removing the dumping cost, the seasonal disruption, and the regulatory burden.",
     bullets: [
       "Replaces a recurring operational expense",
       "No weather/season dependency",
@@ -38,7 +38,7 @@ const models = [
     note: "Fund the commercial scale-up.",
     headline: "Fund the commercial scale-up.",
     body:
-      "Alpha welcomes investors to fund the move from pilot scale to commercial operation. PLI approval secured. Standardised commercial machinery replaces pilot equipment — improving recovery rates and unit economics.",
+      "Alpha welcomes investors to fund the move from pilot scale to commercial operation. PLI approval secured. Standardised commercial machinery replaces pilot equipment, improving recovery rates and unit economics.",
     bullets: [
       "Government PLI approval in hand",
       "Regional-hub deployment plan ready",
@@ -48,10 +48,10 @@ const models = [
   {
     id: "license",
     label: "Licensing",
-    note: "Run your own — we retain equity.",
+    note: "Run your own. We retain equity.",
     headline: "License the technology. We retain equity.",
     body:
-      "A partner can license Alpha's technology and run their own production, with Alpha retaining equity. Licensing in partnership — not an outright sale of the technology.",
+      "A partner can license Alpha's technology and run their own production, with Alpha retaining equity. Licensing in partnership, not an outright sale of the technology.",
     bullets: [
       "Faster geographic expansion via partners",
       "Alpha retains equity in licensed operations",
@@ -89,15 +89,15 @@ export default function PartnerEngagement() {
       <div className="absolute inset-0 grain opacity-40" />
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
-        <SectionLabel number="§ 01" title="Pick & apply" />
-        <div className="mt-6 grid lg:grid-cols-12 gap-10 items-end">
-          <Reveal className="lg:col-span-7" direction="up">
-            <h2 className="font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.2] text-ink">
-              Pick the engagement that fits — and start the conversation right here.
+        <div className="mx-auto max-w-3xl text-center">
+          <SectionLabel number="§ 01" title="Pick & apply" />
+          <Reveal direction="up">
+            <h2 className="mt-6 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.2] text-ink">
+              Pick the engagement that fits, then start the conversation right here.
             </h2>
           </Reveal>
-          <Reveal className="lg:col-span-5" direction="left" delay={0.1}>
-            <p className="text-base text-graphite leading-relaxed">
+          <Reveal direction="up" delay={0.1}>
+            <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl">
               Five engagement modes share the same operational core. They differ in
               financial structure and whose premises the line runs on. We respond within
               two working days.
@@ -203,7 +203,7 @@ export default function PartnerEngagement() {
                     onSubmit={(e) => {
                       e.preventDefault();
                       alert(
-                        `Thank you — enquiry for "${current.label}" received. We'll wire this up to a real backend later.`
+                        `Thank you. Enquiry for "${current.label}" received. We'll wire this up to a real backend later.`
                       );
                     }}
                   >
