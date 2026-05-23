@@ -70,46 +70,61 @@ export default function ProcessPilot() {
           </div>
         </Reveal>
 
+        {/* Road ahead — two new R&D streams */}
         <Reveal className="mt-12" direction="up">
-          <div className="rounded-3xl bg-forest text-paper p-10 sm:p-14 relative overflow-hidden text-center">
+          <div className="rounded-3xl bg-forest text-paper p-10 sm:p-14 relative overflow-hidden">
             <div className="absolute inset-0 grain opacity-30" />
-            <div className="relative mx-auto max-w-3xl">
+            <div className="relative">
               <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-fern/80">
-                From pilot to production
+                The road ahead · pioneering two new streams
               </div>
-              <h3 className="mt-3 font-display text-3xl sm:text-5xl leading-[1.05]">
-                The pilot has run. The first hub is{" "}
-                <span className="text-fern italic">approved</span>.
-              </h3>
-              <div className="mt-6 mx-auto max-w-2xl space-y-4 text-base sm:text-lg text-paper/80 leading-relaxed">
-                <p>
-                  PLI approval is in hand from the Government of India. Hand-built
-                  pilot rigs give way to standardised commercial machinery: recovery
-                  rates climb, unit economics tighten, and the same patented chemistry
-                  runs at commercial throughput.
-                </p>
-                <p>
-                  Because steel waste has a low value per tonne, it cannot travel far
-                  without losing its economics. So we don&apos;t build one giant plant.
-                  We deploy regional hubs, close to where producers actually generate
-                  the waste. The first is approved. The rest follow demand.
-                </p>
-              </div>
-
-              <div className="mt-9 inline-grid grid-cols-3 gap-px bg-fern/20 rounded-full overflow-hidden">
+              <div className="mt-8 grid md:grid-cols-2 gap-x-10 gap-y-9">
                 {[
-                  { k: "PLI", v: "Approved" },
-                  { k: "Patents", v: "7 + 3 in dev" },
-                  { k: "Model", v: "Regional hubs" },
-                ].map((m) => (
-                  <div key={m.k} className="bg-forest px-5 py-3 text-center">
-                    <div className="text-[9px] font-mono uppercase tracking-[0.28em] text-fern/80">
-                      {m.k}
+                  {
+                    title: "Lithium-battery recovery",
+                    body: "Recovering lithium, cobalt and nickel from spent batteries, over 95% material recovery, cutting India's reliance on imported critical minerals.",
+                  },
+                  {
+                    title: "Potash fertilizer",
+                    body: "Converting the recovered gypsum stream into Sulphate of Potash, a chloride-free fertilizer, against India's near-total potash import dependence.",
+                  },
+                ].map((s) => (
+                  <div key={s.title} className="flex gap-4">
+                    <span className="shrink-0 mt-1.5 w-5 h-5 rounded-full border-2 border-fern grid place-items-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-fern" />
+                    </span>
+                    <div>
+                      <h4 className="font-display text-2xl text-paper leading-tight">
+                        {s.title}
+                      </h4>
+                      <p className="mt-3 text-base text-paper/80 leading-relaxed">
+                        {s.body}
+                      </p>
                     </div>
-                    <div className="mt-1 font-display text-base text-paper">{m.v}</div>
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Scaling up */}
+        <Reveal className="mt-6" direction="up">
+          <div className="rounded-3xl bg-forest text-paper p-10 sm:p-14 relative overflow-hidden text-center">
+            <div className="absolute inset-0 grain opacity-30" />
+            <div className="relative mx-auto max-w-2xl">
+              <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-fern/80">
+                Scaling up
+              </div>
+              <h3 className="mt-3 font-display text-3xl sm:text-5xl leading-[1.05]">
+                The first commercial hub is{" "}
+                <span className="text-fern italic">approved</span>.
+              </h3>
+              <p className="mt-5 text-base sm:text-lg text-paper/80 leading-relaxed">
+                Commercial machinery, the same patented chemistry running at
+                full throughput, and regional hubs deployed close to where
+                producers generate the waste. The rest follow demand.
+              </p>
             </div>
           </div>
         </Reveal>
