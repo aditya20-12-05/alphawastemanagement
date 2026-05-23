@@ -4,9 +4,12 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/ui/Reveal";
+import Modal from "@/components/ui/Modal";
 
 /* --------------------------------------------------------------------------
    PARTNER · four engagement modes + one shared contact form.
+   Mobile: card chips open a modal preview; "Use this" CTA pipes the
+   selection into the form's dropdown and scrolls to the form section.
 -------------------------------------------------------------------------- */
 
 const models = [
@@ -60,60 +63,133 @@ const models = [
   },
 ];
 
+/** Tailwind `lg` breakpoint is 1024px. Media-query based check that's
+ *  SSR-safe (defaults to false until mount). */
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return isDesktop;
+}
+
 export default function PartnerEngagement() {
   const [interested, setInterested] = useState<string>("");
+  const [previewId, setPreviewId] = useState<string | null>(null);
+  const isDesktop = useIsDesktop();
 
-  // Honour ?id=X hash on first load (e.g. /partner#investment).
   useEffect(() => {
     if (typeof window === "undefined") return;
     const hash = window.location.hash.replace("#", "");
     if (hash && models.some((m) => m.id === hash)) setInterested(hash);
   }, []);
 
+  const previewModel = models.find((m) => m.id === previewId) ?? null;
+
+  const handleCardClick = (id: string) => {
+    if (isDesktop) {
+      // Desktop: cards reveal their content inline, so click toggles the
+      // form's dropdown selection.
+      setInterested(interested === id ? "" : id);
+    } else {
+      // Mobile: cards are chips — click opens the preview modal.
+      setPreviewId(id);
+    }
+  };
+
+  const commitFromModal = (id: string) => {
+    setInterested(id);
+    setPreviewId(null);
+    // Give the modal close animation a moment, then scroll the form into view.
+    setTimeout(() => {
+      const el = document.getElementById("partner-form");
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 360);
+  };
+
   return (
-    <section className="relative py-20 sm:py-28 overflow-hidden">
-      <div className="absolute inset-0 grain opacity-40" />
+    <>
+      {/* ---------- Engagement modes section ---------- */}
+      <section className="relative pt-20 pb-12 sm:pt-28 sm:pb-16 overflow-hidden">
+        <div className="absolute inset-0 grain opacity-40" />
 
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
-        {/* Engagement modes header */}
-        <div className="mx-auto max-w-3xl text-center">
-          <SectionLabel number="§ 01" title="Engagement modes" />
-          <Reveal direction="up">
-            <h2 className="mt-6 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.2] text-ink">
-              Four ways to work with us.
-            </h2>
-          </Reveal>
-          <Reveal direction="up" delay={0.1}>
-            <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl">
-              Each engagement shares the same operational core. They differ in
-              who funds the build, who runs the line, and where Alpha sits in
-              the value chain.
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <SectionLabel number="§ 01" title="Engagement modes" />
+            <Reveal direction="up">
+              <h2 className="mt-6 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.2] text-ink">
+                Four ways to work with us.
+              </h2>
+            </Reveal>
+            <Reveal direction="up" delay={0.1}>
+              <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl">
+                Each engagement shares the same operational core. They differ in
+                who funds the build, who runs the line, and where Alpha sits in
+                the value chain.
+              </p>
+            </Reveal>
+            <p className="mt-3 text-[10px] font-mono uppercase tracking-[0.28em] text-muted lg:hidden">
+              Tap a chip to read details
             </p>
-          </Reveal>
-        </div>
+          </div>
 
-        {/* 2×2 partnership chip-blocks — floating, hover-pop, click to select */}
-        <div
-          className="mt-12 sm:mt-14 grid lg:grid-cols-2 gap-6 sm:gap-8 items-stretch"
-          style={{ perspective: "1600px" }}
-        >
-          {models.map((m, i) => (
-            <PartnerCard
-              key={m.id}
-              model={m}
-              index={i}
-              highlighted={interested === m.id}
-              onSelect={() => setInterested(interested === m.id ? "" : m.id)}
-            />
-          ))}
+          {/* Chip grid */}
+          <div
+            className="mt-10 sm:mt-14 grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 items-stretch"
+            style={{ perspective: "1600px" }}
+          >
+            {models.map((m, i) => (
+              <PartnerCard
+                key={m.id}
+                model={m}
+                index={i}
+                highlighted={interested === m.id}
+                onSelect={() => handleCardClick(m.id)}
+              />
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* Common contact form */}
-        <ContactForm models={models} interested={interested} setInterested={setInterested} />
-      </div>
-    </section>
+      {/* ---------- Contact form section (visually separate on mobile) ---------- */}
+      <section
+        id="partner-form"
+        className="relative bg-cream/60 border-t border-line py-16 sm:py-24 overflow-hidden"
+      >
+        <div className="absolute inset-0 grain opacity-50" />
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
+          <ContactForm
+            modelList={models}
+            interested={interested}
+            setInterested={setInterested}
+          />
+        </div>
+      </section>
+
+      {/* ---------- Mobile preview modal ---------- */}
+      <Modal
+        open={previewModel !== null}
+        onClose={() => setPreviewId(null)}
+        wrapperClassName="lg:hidden"
+        ariaLabel={previewModel ? `${previewModel.label} details` : "Partnership details"}
+      >
+        {previewModel && (
+          <PartnerModalContent
+            model={previewModel}
+            onCommit={() => commitFromModal(previewModel.id)}
+          />
+        )}
+      </Modal>
+    </>
   );
 }
+
+/* ---------- Card ---------- */
 
 function PartnerCard({
   model,
@@ -126,8 +202,6 @@ function PartnerCard({
   highlighted: boolean;
   onSelect: () => void;
 }) {
-  // Multi-layer drop shadow gives each card the floating, 3D feel the
-  // brief asked for. Strengthens further on hover and when highlighted.
   const restShadow =
     "0 22px 44px -22px rgba(14,47,35,0.22), 0 10px 22px -12px rgba(14,47,35,0.14)";
   const hoverShadow =
@@ -167,12 +241,12 @@ function PartnerCard({
         ease: [0.16, 1, 0.3, 1],
         opacity: { duration: 0.6, delay: index * 0.08 },
       }}
-      className={`group relative rounded-3xl border bg-ivory p-7 sm:p-9 flex flex-col h-full text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-forest transition-colors duration-300 ${
+      className={`group relative rounded-3xl border bg-ivory p-6 sm:p-9 flex flex-col h-full text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-forest transition-colors duration-300 ${
         highlighted ? "border-forest" : "border-line hover:border-moss"
       }`}
       style={{ transformStyle: "preserve-3d" }}
     >
-      {/* Top edge highlight ridge — adds the 3D depth illusion */}
+      {/* Edge ridges for 3D depth */}
       <div
         className="absolute inset-x-7 top-0 h-px pointer-events-none"
         style={{
@@ -180,7 +254,6 @@ function PartnerCard({
             "linear-gradient(90deg, transparent, rgba(14,47,35,0.22), transparent)",
         }}
       />
-      {/* Bottom subtle inner highlight */}
       <div
         className="absolute inset-x-7 bottom-0 h-px pointer-events-none"
         style={{
@@ -198,24 +271,24 @@ function PartnerCard({
             Selected
           </span>
         ) : (
-          <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:inline-block">
             Tap to select
           </span>
         )}
       </div>
 
-      <h3 className="mt-5 font-display text-[clamp(1.6rem,2.8vw,2.2rem)] leading-[1.1] text-ink">
+      <h3 className="mt-5 font-display text-[clamp(1.4rem,2.6vw,2.2rem)] leading-[1.1] text-ink">
         {model.label}
       </h3>
-      <p className="mt-1.5 text-sm font-mono uppercase tracking-[0.22em] text-sage">
+      <p className="mt-1.5 text-[12px] sm:text-sm font-mono uppercase tracking-[0.22em] text-sage">
         {model.note}
       </p>
 
-      <p className="mt-5 text-base text-graphite leading-relaxed flex-1">
+      {/* Body + bullets — desktop only. Mobile gets a chip-style affordance. */}
+      <p className="mt-5 text-base text-graphite leading-relaxed flex-1 hidden lg:block">
         {model.body}
       </p>
-
-      <ul className="mt-6 space-y-2">
+      <ul className="mt-6 space-y-2 hidden lg:block">
         {model.bullets.map((b) => (
           <li key={b} className="flex items-start gap-3 text-sm text-graphite leading-snug">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sage" />
@@ -224,9 +297,26 @@ function PartnerCard({
         ))}
       </ul>
 
-      {/* Hover-only chevron in bottom-right corner */}
+      {/* Mobile chip footer */}
+      <div className="mt-6 flex items-center justify-between gap-3 lg:hidden">
+        <span className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted">
+          Read details
+        </span>
+        <span className="w-9 h-9 grid place-items-center rounded-full border border-line text-forest bg-paper/60">
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+            <path
+              d="M1 7H13M13 7L7 1M13 7L7 13"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </span>
+      </div>
+
+      {/* Hover-only chevron — desktop affordance */}
       <motion.div
-        className="absolute bottom-5 right-5 w-9 h-9 grid place-items-center rounded-full border border-line text-forest opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute bottom-5 right-5 w-9 h-9 grid place-items-center rounded-full border border-line text-forest opacity-0 group-hover:opacity-100 transition-opacity duration-300 hidden lg:grid"
         style={{ background: "rgba(245,241,232,0.6)" }}
       >
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -242,19 +332,65 @@ function PartnerCard({
   );
 }
 
+/* ---------- Modal preview body ---------- */
+
+function PartnerModalContent({
+  model,
+  onCommit,
+}: {
+  model: (typeof models)[number];
+  onCommit: () => void;
+}) {
+  return (
+    <div className="px-6 pt-6 pb-8 sm:px-8 sm:pb-10">
+      <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-muted">
+        Partnership
+      </div>
+      <h3 className="mt-2 font-display text-3xl leading-[1.1] text-ink">
+        {model.label}
+      </h3>
+      <p className="mt-1.5 text-sm font-mono uppercase tracking-[0.22em] text-sage">
+        {model.note}
+      </p>
+      <p className="mt-5 text-base text-graphite leading-relaxed">
+        {model.body}
+      </p>
+      <ul className="mt-6 space-y-3">
+        {model.bullets.map((b) => (
+          <li key={b} className="flex items-start gap-3 text-sm text-graphite leading-snug">
+            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sage" />
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+
+      <button
+        type="button"
+        onClick={onCommit}
+        className="mt-8 w-full inline-flex items-center justify-between gap-2 rounded-full bg-forest text-paper px-5 py-3.5 text-sm font-medium"
+      >
+        <span>Use this for my enquiry</span>
+        <span>→</span>
+      </button>
+    </div>
+  );
+}
+
+/* ---------- Contact form ---------- */
+
 function ContactForm({
-  models,
+  modelList,
   interested,
   setInterested,
 }: {
-  models: typeof models;
+  modelList: typeof models;
   interested: string;
   setInterested: (v: string) => void;
 }) {
-  const selectedLabel = models.find((m) => m.id === interested)?.label;
+  const selectedLabel = modelList.find((m) => m.id === interested)?.label;
 
   return (
-    <Reveal className="mt-16 sm:mt-20" direction="up">
+    <Reveal direction="up">
       <div className="mx-auto max-w-3xl text-center">
         <SectionLabel number="§ 02" title="Get in touch" />
         <h3 className="mt-6 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] text-ink">
@@ -276,7 +412,7 @@ function ContactForm({
             } received. We'll wire this up to a real backend later.`
           );
         }}
-        className="mt-10 mx-auto max-w-4xl rounded-3xl border border-line bg-ivory p-7 sm:p-10"
+        className="mt-10 mx-auto max-w-4xl rounded-3xl border border-line bg-ivory p-6 sm:p-10"
       >
         <div className="grid sm:grid-cols-2 gap-5">
           <Field label="Your name" id="p-name" placeholder="Full name" />
@@ -300,7 +436,7 @@ function ContactForm({
               className="w-full appearance-none rounded-xl border border-line bg-paper/60 px-4 py-3 text-sm text-ink focus:outline-none focus:border-forest focus:bg-ivory transition-colors cursor-pointer"
             >
               <option value="">Choose a partnership…</option>
-              {models.map((m) => (
+              {modelList.map((m) => (
                 <option key={m.id} value={m.id}>
                   {m.label}
                 </option>
@@ -327,14 +463,14 @@ function ContactForm({
           />
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <p className="text-xs text-muted max-w-sm">
             By submitting, you consent to Alpha contacting you about your
             enquiry. We don&apos;t share contact details.
           </p>
           <button
             type="submit"
-            className="group relative inline-flex items-center gap-2 rounded-full bg-forest text-paper px-6 py-3.5 text-sm font-medium overflow-hidden"
+            className="group relative inline-flex items-center justify-between sm:justify-center gap-2 rounded-full bg-forest text-paper px-6 py-3.5 text-sm font-medium overflow-hidden w-full sm:w-auto"
           >
             <span className="relative z-10">
               {selectedLabel ? `Send enquiry · ${selectedLabel.split(" ")[0]}` : "Send enquiry"}

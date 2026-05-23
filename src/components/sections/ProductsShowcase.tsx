@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/ui/Reveal";
+import Modal from "@/components/ui/Modal";
 
 const products = [
   {
@@ -139,7 +140,8 @@ export default function ProductsShowcase() {
         </Reveal>
 
         {/* Datasheet panel */}
-        <Reveal className="mt-8" direction="up">
+        {/* Datasheet — inline below the grid on desktop only. */}
+        <Reveal className="mt-8 hidden lg:block" direction="up">
           {current === null || active === null ? (
             <EmptyDatasheet />
           ) : (
@@ -147,6 +149,20 @@ export default function ProductsShowcase() {
           )}
         </Reveal>
       </div>
+
+      {/* Datasheet — modal bottom-sheet on mobile only. */}
+      <Modal
+        open={current !== null && active !== null}
+        onClose={() => setActive(null)}
+        wrapperClassName="lg:hidden"
+        ariaLabel={current ? `${current.name} datasheet` : "Product datasheet"}
+      >
+        {current !== null && active !== null && (
+          <div className="px-1 pb-8">
+            <DatasheetPanel product={current} index={active} />
+          </div>
+        )}
+      </Modal>
     </section>
   );
 }
