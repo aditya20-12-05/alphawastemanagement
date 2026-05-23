@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import PageFooter from "@/components/ui/PageFooter";
+import AboutSubheading from "@/components/sections/AboutSubheading";
 import AboutWhatIs from "@/components/sections/AboutWhatIs";
+import AboutAlphaName from "@/components/sections/AboutAlphaName";
 import AboutParent from "@/components/sections/AboutParent";
 import AboutCredibility from "@/components/sections/AboutCredibility";
+import AboutMarket from "@/components/sections/AboutMarket";
 import NextPageCTA from "@/components/ui/NextPageCTA";
 
 export const metadata: Metadata = {
@@ -18,22 +21,27 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About · Chapter I"
         title="About Alpha."
-        subtitle={
-          <>
-            We don&apos;t recycle our slag.{" "}
-            <span className="text-forest italic">We valorize it into saleable oxides.</span>
-          </>
-        }
+        subtitle={<AboutSubheading />}
         meta={[
           { label: "Pilot today", value: "180 MT/mo" },
-          { label: "Patents granted", value: "Seven" },
+          { label: "Patents", value: "7 + 3 in dev" },
           { label: "PLI", value: "Approved" },
           { label: "Backed by", value: "38-yr parent" },
         ]}
       />
-      <AboutWhatIs />
-      <AboutParent />
-      <AboutCredibility />
+
+      {/* Two-column block grid */}
+      <section className="relative py-14 sm:py-20">
+        <div className="absolute inset-0 grain opacity-40 pointer-events-none" />
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-8 grid lg:grid-cols-2 gap-5 sm:gap-6 items-stretch">
+          <AboutWhatIs />
+          <AboutAlphaName />
+          <AboutParent />
+          <AboutCredibility />
+          <AboutMarket />
+        </div>
+      </section>
+
       <NextPageCTA
         href="/process"
         meta="Chapter II"

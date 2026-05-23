@@ -21,7 +21,7 @@ export default function HomeIntro() {
           <span className="h-px w-10 bg-forest" />
         </motion.div>
 
-        <h1 className="mt-10 font-display text-[clamp(2.8rem,8vw,7rem)] leading-[0.95] tracking-tight mx-auto max-w-6xl">
+        <h1 className="mt-10 font-display text-[clamp(2.8rem,8vw,7rem)] leading-[1.05] tracking-tight mx-auto max-w-6xl">
           {["Industry", "waste"].map((w, i) => (
             <motion.span
               key={w + i}
@@ -34,7 +34,7 @@ export default function HomeIntro() {
             </motion.span>
           ))}
           <span className="block">
-            {["turned", "into", "revenue."].map((w, i) => (
+            {["turned", "into"].map((w, i) => (
               <motion.span
                 key={w + i}
                 initial={{ opacity: 0, y: 60 }}
@@ -45,6 +45,17 @@ export default function HomeIntro() {
                 {w}
               </motion.span>
             ))}
+            <motion.span
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.66, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-block"
+            >
+              <span className="inline-block bg-sage text-paper rounded-xl sm:rounded-2xl px-[0.28em] py-[0.04em] leading-[0.95]">
+                revenue
+              </span>
+              <span className="text-forest">.</span>
+            </motion.span>
           </span>
         </h1>
 
@@ -56,7 +67,7 @@ export default function HomeIntro() {
         >
           Alpha Waste Management is the waste-valorization venture of Mangalam Alloys
           Ltd., a 38-year-old steel manufacturer with a government-recognised
-          research centre. We valorize industrial waste into recovered metals,
+          R&amp;D centre. We valorize industrial waste into recovered metals,
           gypsum, sodium sulphate, metal-oxide powders, and cement-less bricks.
           Pilot scale today; commercial scale-up underway under Government of India
           PLI approval.
