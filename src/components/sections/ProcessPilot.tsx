@@ -76,9 +76,16 @@ export default function ProcessPilot() {
             <div className="absolute inset-0 grain opacity-30" />
             <div className="relative">
               <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-fern/80">
-                The road ahead · pioneering two new streams
+                What&apos;s next
               </div>
-              <div className="mt-8 grid md:grid-cols-2 gap-x-10 gap-y-9">
+              <h3 className="mt-3 font-display text-3xl sm:text-5xl leading-[1.05]">
+                Research &amp; <span className="text-fern italic">Development</span>.
+              </h3>
+              <p className="mt-3 text-sm sm:text-base text-paper/70 leading-relaxed max-w-2xl">
+                Two new streams under active development, both with national
+                strategic value.
+              </p>
+              <div className="mt-10 grid md:grid-cols-2 gap-x-10 gap-y-9">
                 {[
                   {
                     title: "Lithium-battery recovery",
@@ -108,22 +115,22 @@ export default function ProcessPilot() {
           </div>
         </Reveal>
 
-        {/* Scaling up */}
+        {/* Scaling up — PLI approval */}
         <Reveal className="mt-6" direction="up">
           <div className="rounded-3xl bg-forest text-paper p-10 sm:p-14 relative overflow-hidden text-center">
             <div className="absolute inset-0 grain opacity-30" />
             <div className="relative mx-auto max-w-2xl">
               <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-fern/80">
-                Scaling up
+                Government approval
               </div>
               <h3 className="mt-3 font-display text-3xl sm:text-5xl leading-[1.05]">
-                The first commercial hub is{" "}
-                <span className="text-fern italic">approved</span>.
+                We are now <span className="text-fern italic">PLI approved</span>.
               </h3>
               <p className="mt-5 text-base sm:text-lg text-paper/80 leading-relaxed">
-                Commercial machinery, the same patented chemistry running at
-                full throughput, and regional hubs deployed close to where
-                producers generate the waste. The rest follow demand.
+                The Government of India&apos;s Production Linked Incentive scheme
+                underwrites Alpha&apos;s commercial scale-up. The patented
+                chemistry runs at full throughput, the first regional hub is in
+                place, and the rest follow demand.
               </p>
             </div>
           </div>
