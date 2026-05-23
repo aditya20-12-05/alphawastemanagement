@@ -17,11 +17,10 @@ const columns = [
   {
     title: "Engagement",
     links: [
-      { label: "MOU collection", href: "/partner#mou" },
-      { label: "On-site co-processing", href: "/partner#onsite" },
+      { label: "Operations partnership", href: "/partner#operations" },
       { label: "Investment", href: "/partner#investment" },
-      { label: "Licensing", href: "/partner#license" },
-      { label: "Synergy", href: "/partner#synergy" },
+      { label: "Licensing", href: "/partner#licensing" },
+      { label: "Collaboration", href: "/partner#collaboration" },
     ],
   },
   {
@@ -56,7 +55,7 @@ export default function PageFooter() {
               </span>
             </Link>
             <p className="mt-5 text-sm text-paper/65 max-w-sm leading-relaxed">
-              A waste-valorization venture of Mangalam Alloys Ltd. Operating at pilot scale today.
+              A waste-valorization venture of Mangalam Alloys Ltd. Patented technology operating today, now scaling to industrial throughput.
               Government of India PLI approval secured for commercial scale-up.
             </p>
 

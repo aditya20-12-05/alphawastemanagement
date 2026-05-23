@@ -6,7 +6,7 @@ import PartnerEngagement from "@/components/sections/PartnerEngagement";
 export const metadata: Metadata = {
   title: "Partner with Alpha. Engagement Models",
   description:
-    "Five ways to engage with Alpha Waste Management: MOU collection, on-site co-processing, investment, licensing with retained equity, and international technology synergy.",
+    "Four ways to engage with Alpha Waste Management: operations partnership (collection or on-site), investment, licensing, and collaboration.",
 };
 
 export default function PartnerPage() {
@@ -15,7 +15,7 @@ export default function PartnerPage() {
       <PageHero
         eyebrow="Partner · Chapter IV"
         title="Work with us."
-        subtitle="Five engagement models around one core process. Pick the one that fits your constraints."
+        subtitle="Four engagement models around one core process. Pick the one that fits your constraints."
         fillViewport
       />
       <PartnerEngagement />

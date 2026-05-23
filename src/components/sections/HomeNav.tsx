@@ -34,7 +34,7 @@ const tiles = [
     title: "Partner",
     meta: "Chapter IV",
     body:
-      "Five ways to engage: MOU collection, on-site co-processing, investment, licensing, and international synergy.",
+      "Four ways to engage: operations partnership, investment, licensing, and collaboration.",
     accent: "#4A7C4E",
   },
 ];

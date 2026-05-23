@@ -29,7 +29,7 @@ export default function ProductsPage() {
         href="/partner"
         meta="Chapter IV"
         title="Partner with us."
-        body="Five ways to engage: MOU collection, on-site co-processing, investment, licensing, and international technology synergy."
+        body="Four ways to engage: operations partnership, investment, licensing, and collaboration."
       />
       <PageFooter />
     </main>
