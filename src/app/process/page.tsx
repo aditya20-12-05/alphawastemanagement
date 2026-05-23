@@ -18,9 +18,8 @@ export default function ProcessPage() {
       <PageHero
         eyebrow="Process · Chapter II"
         title="How we do it."
-        subtitle="Four patented stages convert industrial steel waste into saleable output. Nothing is dumped back."
         meta={[
-          { label: "Stages", value: "Four" },
+          { label: "Research projects", value: "2 in progress" },
           { label: "Mass balance", value: "100%" },
           { label: "Pilot throughput", value: "≈ 180 tonnes/mo" },
           { label: "Residue", value: "Zero" },

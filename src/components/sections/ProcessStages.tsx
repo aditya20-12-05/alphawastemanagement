@@ -135,11 +135,8 @@ export default function ProcessStages() {
                     <h3 className="mt-3 font-display text-3xl sm:text-5xl tracking-tight leading-[1.05]">
                       {stages[active].title}
                     </h3>
-                    <p className="mt-2 text-base sm:text-lg text-fern italic">{stages[active].short}</p>
-                    <p className="mt-4 text-sm sm:text-base text-paper/80 leading-relaxed max-w-lg">
-                      {stages[active].body}
-                    </p>
-                    <div className="mt-6 inline-flex items-center gap-3 px-4 py-2.5 rounded-full glass-forest">
+                    <p className="mt-3 text-base sm:text-lg text-fern italic">{stages[active].short}</p>
+                    <div className="mt-7 inline-flex items-center gap-3 px-4 py-2.5 rounded-full glass-forest">
                       <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-fern/85">
                         Output →
                       </span>

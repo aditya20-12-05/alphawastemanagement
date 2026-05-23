@@ -7,7 +7,6 @@ import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 const flows = [
   { stream: "Chemical sludge processing", capacity: "≈ 50 tonnes" },
-  { stream: "ETP-solution metal recovery", capacity: "≈ 100 tonnes" },
   { stream: "Slag processing", capacity: "≈ 250 tonnes" },
 ];
 
@@ -76,17 +75,41 @@ export default function ProcessPilot() {
             <div className="absolute inset-0 grain opacity-30" />
             <div className="relative mx-auto max-w-3xl">
               <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-fern/80">
-                Scaling up
+                From pilot to production
               </div>
-              <h3 className="mt-3 font-display text-2xl sm:text-3xl leading-[1.15]">
-                PLI approval received. Standardised commercial machinery replaces
-                improvised pilot equipment, improving recovery rates and unit economics.
+              <h3 className="mt-3 font-display text-3xl sm:text-5xl leading-[1.05]">
+                The pilot has run. The first hub is{" "}
+                <span className="text-fern italic">approved</span>.
               </h3>
-              <p className="mt-4 text-base text-paper/75 leading-relaxed mx-auto max-w-xl">
-                Because waste has low value per tonne, it cannot travel far economically.
-                A regional-hub model is core to the business: recycling hubs deployed
-                across India&apos;s regions to serve local producers.
-              </p>
+              <div className="mt-6 mx-auto max-w-2xl space-y-4 text-base sm:text-lg text-paper/80 leading-relaxed">
+                <p>
+                  PLI approval is in hand from the Government of India. Hand-built
+                  pilot rigs give way to standardised commercial machinery: recovery
+                  rates climb, unit economics tighten, and the same patented chemistry
+                  runs at commercial throughput.
+                </p>
+                <p>
+                  Because steel waste has a low value per tonne, it cannot travel far
+                  without losing its economics. So we don&apos;t build one giant plant.
+                  We deploy regional hubs, close to where producers actually generate
+                  the waste. The first is approved. The rest follow demand.
+                </p>
+              </div>
+
+              <div className="mt-9 inline-grid grid-cols-3 gap-px bg-fern/20 rounded-full overflow-hidden">
+                {[
+                  { k: "PLI", v: "Approved" },
+                  { k: "Patents", v: "7 + 3 in dev" },
+                  { k: "Model", v: "Regional hubs" },
+                ].map((m) => (
+                  <div key={m.k} className="bg-forest px-5 py-3 text-center">
+                    <div className="text-[9px] font-mono uppercase tracking-[0.28em] text-fern/80">
+                      {m.k}
+                    </div>
+                    <div className="mt-1 font-display text-base text-paper">{m.v}</div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </Reveal>
