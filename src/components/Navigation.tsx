@@ -50,7 +50,7 @@ export default function Navigation() {
         >
           <Link href="/" className="flex items-center gap-2.5 group">
             <Logo className="h-7 w-7 text-forest transition-transform duration-700 group-hover:rotate-180" />
-            <span className="flex flex-col items-start leading-none">
+            <span className="flex flex-col items-center leading-none">
               <span className="font-display text-lg sm:text-xl tracking-tight text-forest">
                 Alpha
               </span>
