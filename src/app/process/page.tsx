@@ -22,7 +22,7 @@ export default function ProcessPage() {
         meta={[
           { label: "Stages", value: "Four" },
           { label: "Mass balance", value: "100%" },
-          { label: "Pilot throughput", value: "≈ 180 MT/mo" },
+          { label: "Pilot throughput", value: "≈ 180 tonnes/mo" },
           { label: "Residue", value: "Zero" },
         ]}
       />

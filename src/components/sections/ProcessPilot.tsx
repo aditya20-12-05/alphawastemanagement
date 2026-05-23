@@ -6,9 +6,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 const flows = [
-  { stream: "Chemical sludge processing", capacity: "≈ 50 MT" },
-  { stream: "ETP-solution metal recovery", capacity: "≈ 100 MT" },
-  { stream: "Slag processing", capacity: "≈ 250 MT" },
+  { stream: "Chemical sludge processing", capacity: "≈ 50 tonnes" },
+  { stream: "ETP-solution metal recovery", capacity: "≈ 100 tonnes" },
+  { stream: "Slag processing", capacity: "≈ 250 tonnes" },
 ];
 
 export default function ProcessPilot() {
@@ -49,7 +49,7 @@ export default function ProcessPilot() {
                 Pilot scale, recycled per month
               </div>
               <div className="mt-4 font-display text-7xl sm:text-9xl text-forest tabular-nums leading-none">
-                <AnimatedCounter to={180} suffix=" MT" />
+                <AnimatedCounter to={180} suffix=" tonnes" />
               </div>
               <p className="mt-5 text-sm sm:text-base text-graphite leading-relaxed mx-auto max-w-md">
                 Already operating with patented processes. Cement-less brick production

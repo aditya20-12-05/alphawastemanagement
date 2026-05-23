@@ -12,7 +12,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 const stats = [
   {
     region: "World",
-    figure: "1.88 bnt",
+    figure: "1.88 Bt",
     metric: "crude steel produced per year",
     source: "World Steel Association · 2023",
   },
@@ -148,8 +148,10 @@ export default function AboutMarket() {
       </div>
 
       <p className="mt-7 text-center text-[10px] font-mono uppercase tracking-[0.22em] text-muted/70">
-        Figures are public-record statistics from the sources cited. Numbers
-        rounded for readability.
+        Bt = billion tonnes &middot; Mt = million tonnes &middot; tonnes = single metric tonnes
+      </p>
+      <p className="mt-2 text-center text-[10px] font-mono uppercase tracking-[0.22em] text-muted/60">
+        Figures are public-record statistics from the sources cited. Numbers rounded for readability.
       </p>
     </div>
   );

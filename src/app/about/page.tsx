@@ -23,7 +23,7 @@ export default function AboutPage() {
         title="About Alpha."
         subtitle={<AboutSubheading />}
         meta={[
-          { label: "Pilot today", value: "180 MT/mo" },
+          { label: "Pilot today", value: "180 tonnes/mo" },
           { label: "Patents", value: "7 + 3 in dev" },
           { label: "PLI", value: "Approved" },
           { label: "Backed by", value: "38-yr parent" },
