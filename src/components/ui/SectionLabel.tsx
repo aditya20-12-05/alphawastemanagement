@@ -46,8 +46,7 @@ export function SectionLabel({
           }`}
         >
           <span className={numberColor}>{number}</span>
-          <span className={`h-px w-8 ${lineColor}`} />
-          <span className={titleColor}>Chapter</span>
+          <span className={`h-px w-12 ${lineColor}`} />
         </div>
         <h2
           className={`mt-3 font-display text-[clamp(1.5rem,2.6vw,2.05rem)] leading-[1.15] tracking-tight ${promTitleColor}`}

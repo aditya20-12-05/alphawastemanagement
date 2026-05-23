@@ -8,7 +8,7 @@ const tiles = [
   {
     href: "/about",
     title: "About",
-    meta: "Chapter I",
+    meta: "I",
     body:
       "What Alpha is, who's behind it, and why it's credible. The parent company, the R&D centre, the patents, in short.",
     accent: "#0E2F23",
@@ -16,7 +16,7 @@ const tiles = [
   {
     href: "/process",
     title: "Process",
-    meta: "Chapter II",
+    meta: "II",
     body:
       "Patented stages: segregation, metal recovery, hydrometallurgy, and cement-less brick manufacturing.",
     accent: "#1F3A2E",
@@ -24,7 +24,7 @@ const tiles = [
   {
     href: "/products",
     title: "Products",
-    meta: "Chapter III",
+    meta: "III",
     body:
       "Recovered metals, gypsum, sodium sulphate, metal-oxide powders, and bricks. Every stream with an industrial buyer.",
     accent: "#2F4E3E",
@@ -32,7 +32,7 @@ const tiles = [
   {
     href: "/partner",
     title: "Partner",
-    meta: "Chapter IV",
+    meta: "IV",
     body:
       "Four ways to engage: operations partnership, investment, licensing, and collaboration.",
     accent: "#4A7C4E",
@@ -73,7 +73,7 @@ export default function HomeNav() {
             <span className="h-px w-10 bg-forest" />
           </motion.div>
           <h2 className="mt-3 font-display text-[clamp(1.6rem,3.5vw,2.8rem)] leading-[1.1] tracking-tight mx-auto max-w-2xl">
-            The full picture in four chapters.
+            The full picture, in four parts.
           </h2>
         </div>
 
@@ -106,7 +106,7 @@ export default function HomeNav() {
               onClick={() => setActive((a) => Math.max(0, a - 1))}
               disabled={active === 0}
               className="w-11 h-11 grid place-items-center rounded-full border border-line bg-ivory text-forest hover:border-forest disabled:opacity-30 transition-colors"
-              aria-label="Previous chapter"
+              aria-label="Previous section"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M13 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -121,7 +121,7 @@ export default function HomeNav() {
                   className="group flex flex-col items-center gap-2"
                 >
                   <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted group-hover:text-forest transition-colors">
-                    {t.meta.split(" ")[1]}
+                    {t.meta}
                   </span>
                   <span
                     className={`block h-1 rounded-full transition-all duration-500 ${
@@ -136,7 +136,7 @@ export default function HomeNav() {
               onClick={() => setActive((a) => Math.min(tiles.length - 1, a + 1))}
               disabled={active === tiles.length - 1}
               className="w-11 h-11 grid place-items-center rounded-full border border-line bg-ivory text-forest hover:border-forest disabled:opacity-30 transition-colors"
-              aria-label="Next chapter"
+              aria-label="Next section"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -224,7 +224,7 @@ function Card({
               href={tile.href}
               className="mt-6 inline-flex items-center justify-between gap-3 rounded-full bg-forest text-paper px-5 py-3 text-sm font-medium group"
             >
-              <span>Read this chapter</span>
+              <span>Read more</span>
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
           ) : (

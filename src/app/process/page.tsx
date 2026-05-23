@@ -16,7 +16,7 @@ export default function ProcessPage() {
   return (
     <main className="relative">
       <PageHero
-        eyebrow="Process · Chapter II"
+        eyebrow="Process"
         title="How we do it."
         meta={[
           { label: "Research projects", value: "2 in progress" },
@@ -30,7 +30,7 @@ export default function ProcessPage() {
       <ProcessPilot />
       <NextPageCTA
         href="/products"
-        meta="Chapter III"
+        meta="Products"
         title="The Products"
         body="Five output streams: recovered metals, gypsum, sodium sulphate, metal-oxide powders, and cement-less bricks."
       />

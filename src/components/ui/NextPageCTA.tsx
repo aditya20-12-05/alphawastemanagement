@@ -24,7 +24,7 @@ export default function NextPageCTA({ href, meta, title, body }: Props) {
             transition={{ duration: 0.6 }}
             className="text-[10px] font-mono uppercase tracking-[0.28em] text-fern/80"
           >
-            Continue · {meta}
+            Up next · {meta}
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -51,7 +51,7 @@ export default function NextPageCTA({ href, meta, title, body }: Props) {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="mt-8 inline-flex items-center gap-3 rounded-full border border-fern/40 px-6 py-3.5 text-sm font-medium text-fern group-hover:bg-fern group-hover:text-forest group-hover:border-fern transition-colors"
           >
-            Read chapter
+            Read more
             <span className="transition-transform group-hover:translate-x-1">→</span>
           </motion.div>
         </div>

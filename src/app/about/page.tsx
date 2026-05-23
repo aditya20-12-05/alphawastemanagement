@@ -19,7 +19,7 @@ export default function AboutPage() {
   return (
     <main className="relative">
       <PageHero
-        eyebrow="About · Chapter I"
+        eyebrow="About"
         title="About Alpha."
         subtitle={<AboutSubheading />}
       />
@@ -38,7 +38,7 @@ export default function AboutPage() {
 
       <NextPageCTA
         href="/process"
-        meta="Chapter II"
+        meta="Process"
         title="See the process."
         body="Patented stages turn hazardous waste into saleable output."
       />

@@ -13,7 +13,7 @@ export default function PartnerPage() {
   return (
     <main className="relative">
       <PageHero
-        eyebrow="Partner · Chapter IV"
+        eyebrow="Partner"
         title="Work with us."
         subtitle="Four engagement models around one core process. Pick the one that fits your constraints."
         fillViewport

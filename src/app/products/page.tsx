@@ -14,7 +14,8 @@ export default function ProductsPage() {
   return (
     <main className="relative">
       <PageHero
-        eyebrow="Products · Chapter III"
+        fillViewport
+        eyebrow="Products"
         title="What we produce."
         subtitle="Five output streams come out of the process. Every one of them has an existing industrial market."
         meta={[
@@ -27,7 +28,7 @@ export default function ProductsPage() {
       <ProductsShowcase />
       <NextPageCTA
         href="/partner"
-        meta="Chapter IV"
+        meta="Partner"
         title="Partner with us."
         body="Four ways to engage: operations partnership, investment, licensing, and collaboration."
       />

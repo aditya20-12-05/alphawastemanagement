@@ -69,7 +69,7 @@ export default function Cinematic() {
         <CornerMarks />
         <TitleStrip />
 
-        <div className="absolute inset-0 flex items-center justify-center pt-20 pb-40 px-6 sm:px-12">
+        <div className="absolute inset-0 flex items-center justify-center pt-40 sm:pt-44 pb-40 px-6 sm:px-12">
           <PFDCanvas activePhase={activePhase} />
         </div>
 
@@ -130,16 +130,20 @@ function CornerMarks() {
 
 function TitleStrip() {
   return (
-    <div className="absolute top-6 left-8 right-8 z-20 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.28em] text-forest pointer-events-none">
-      <span>Alpha · how it works</span>
-      <span className="hidden sm:inline">Scroll to advance</span>
+    <div className="absolute top-8 sm:top-10 left-0 right-0 z-20 px-6 text-center pointer-events-none">
+      <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-muted">
+        § Process
+      </div>
+      <h2 className="mt-2 font-display text-[clamp(1.5rem,3.4vw,2.4rem)] leading-[1.1] tracking-tight text-ink">
+        Alpha, how it works.
+      </h2>
     </div>
   );
 }
 
 function ProgressBar({ activePhase }: { activePhase: number }) {
   return (
-    <div className="absolute top-20 sm:top-24 left-1/2 -translate-x-1/2 z-30">
+    <div className="absolute top-32 sm:top-36 left-1/2 -translate-x-1/2 z-30">
       <div className="flex items-center gap-2 sm:gap-3">
         {PHASES.map((p, i) => (
           <motion.div
@@ -176,7 +180,7 @@ function Captions({ activePhase }: { activePhase: number }) {
             className="absolute inset-0"
           >
             <div className="inline-flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.28em] text-forest">
-              <span className="border border-forest px-1.5 py-0.5">Chapter {phase.numeral}</span>
+              <span className="border border-forest px-1.5 py-0.5">{phase.numeral}</span>
               <span className="opacity-60">{phase.title}</span>
             </div>
             <p className="mt-3 mx-auto text-sm sm:text-base text-graphite leading-relaxed max-w-xl">
