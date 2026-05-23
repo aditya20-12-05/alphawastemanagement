@@ -92,10 +92,19 @@ export default function PartnerEngagement() {
           </Reveal>
         </div>
 
-        {/* 2×2 partnership chip-blocks */}
-        <div className="mt-12 sm:mt-14 grid lg:grid-cols-2 gap-5 sm:gap-6 items-stretch">
+        {/* 2×2 partnership chip-blocks — floating, hover-pop, click to select */}
+        <div
+          className="mt-12 sm:mt-14 grid lg:grid-cols-2 gap-6 sm:gap-8 items-stretch"
+          style={{ perspective: "1600px" }}
+        >
           {models.map((m, i) => (
-            <PartnerCard key={m.id} model={m} index={i} highlighted={interested === m.id} />
+            <PartnerCard
+              key={m.id}
+              model={m}
+              index={i}
+              highlighted={interested === m.id}
+              onSelect={() => setInterested(interested === m.id ? "" : m.id)}
+            />
           ))}
         </div>
 
@@ -110,30 +119,87 @@ function PartnerCard({
   model,
   index,
   highlighted,
+  onSelect,
 }: {
   model: (typeof models)[number];
   index: number;
   highlighted: boolean;
+  onSelect: () => void;
 }) {
+  // Multi-layer drop shadow gives each card the floating, 3D feel the
+  // brief asked for. Strengthens further on hover and when highlighted.
+  const restShadow =
+    "0 22px 44px -22px rgba(14,47,35,0.22), 0 10px 22px -12px rgba(14,47,35,0.14)";
+  const hoverShadow =
+    "0 40px 80px -28px rgba(14,47,35,0.35), 0 18px 38px -18px rgba(14,47,35,0.24), 0 6px 14px -8px rgba(14,47,35,0.14)";
+  const selectedShadow =
+    "0 36px 64px -22px rgba(14,47,35,0.34), 0 14px 30px -14px rgba(14,47,35,0.22), 0 4px 12px -6px rgba(14,47,35,0.12)";
+
   return (
     <motion.div
       id={model.id}
-      initial={{ opacity: 0, y: 18 }}
+      role="button"
+      tabIndex={0}
+      aria-pressed={highlighted}
+      onClick={onSelect}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onSelect();
+        }
+      }}
+      initial={{ opacity: 0, y: 28, boxShadow: restShadow }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: (index % 2) * 0.06, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative rounded-3xl border bg-ivory p-7 sm:p-9 flex flex-col h-full transition-colors ${
-        highlighted ? "border-forest" : "border-line"
+      animate={{
+        y: highlighted ? -10 : 0,
+        scale: highlighted ? 1.015 : 1,
+        boxShadow: highlighted ? selectedShadow : restShadow,
+      }}
+      whileHover={{
+        y: -16,
+        scale: 1.03,
+        boxShadow: hoverShadow,
+        transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+      }}
+      transition={{
+        duration: 0.5,
+        ease: [0.16, 1, 0.3, 1],
+        opacity: { duration: 0.6, delay: index * 0.08 },
+      }}
+      className={`group relative rounded-3xl border bg-ivory p-7 sm:p-9 flex flex-col h-full text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-forest transition-colors duration-300 ${
+        highlighted ? "border-forest" : "border-line hover:border-moss"
       }`}
-      style={highlighted ? { boxShadow: "0 24px 48px -22px rgba(14,47,35,0.25)" } : undefined}
+      style={{ transformStyle: "preserve-3d" }}
     >
+      {/* Top edge highlight ridge — adds the 3D depth illusion */}
+      <div
+        className="absolute inset-x-7 top-0 h-px pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(14,47,35,0.22), transparent)",
+        }}
+      />
+      {/* Bottom subtle inner highlight */}
+      <div
+        className="absolute inset-x-7 bottom-0 h-px pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)",
+        }}
+      />
+
       <div className="flex items-center justify-between">
         <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-muted">
           Partnership · {String(index + 1).padStart(2, "0")}
         </div>
-        {highlighted && (
+        {highlighted ? (
           <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-forest bg-cream border border-line rounded-full px-2.5 py-0.5">
             Selected
+          </span>
+        ) : (
+          <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Tap to select
           </span>
         )}
       </div>
@@ -157,6 +223,21 @@ function PartnerCard({
           </li>
         ))}
       </ul>
+
+      {/* Hover-only chevron in bottom-right corner */}
+      <motion.div
+        className="absolute bottom-5 right-5 w-9 h-9 grid place-items-center rounded-full border border-line text-forest opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: "rgba(245,241,232,0.6)" }}
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path
+            d="M1 7H13M13 7L7 1M13 7L7 13"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      </motion.div>
     </motion.div>
   );
 }
