@@ -10,15 +10,14 @@ const products = [
     id: "metal",
     streamTag: "S05",
     name: "Recovered metal",
-    formula: "Fe / Cr / Ni",
+    formula: "Mix of alloys",
     symbol: "Fe",
     description:
-      "Metal extracted from waste: directly re-used fine particles, plus metal recovered from dust and oxides through dedicated separation routes.",
+      "Metal recovered from dust and oxides through dedicated separation routes.",
     markets: ["Steel-making feed", "Secondary metal markets"],
     properties: [
-      { k: "Form", v: "Fines + recovered" },
+      { k: "Form", v: "Solid" },
       { k: "Route", v: "Segregation → Recovery" },
-      { k: "Re-use", v: "Direct to melt shop" },
     ],
     accent: "#0E2F23",
     fg: "#F5F1E8",
@@ -31,10 +30,9 @@ const products = [
     formula: "CaSO₄",
     symbol: "Ca",
     description:
-      "A mineral product (calcium sulphate) recovered from the chemical process. Patented route from steel ETP neutralised sludge.",
+      "A mineral product recovered from the chemical process.",
     markets: ["Construction materials", "Industrial mineral applications"],
     properties: [
-      { k: "Patent", v: "Granted · Indian" },
       { k: "Route", v: "Hydrometallurgy" },
       { k: "Form", v: "Crystalline" },
     ],
@@ -50,10 +48,9 @@ const products = [
     symbol: "Na",
     description:
       "A salt recovered from the process. Alpha is developing it into an organic fertilizer, converting a recovery stream into agricultural value.",
-    markets: ["Industrial chemistry", "Organic fertilizer (in development)"],
+    markets: ["Detergent industry", "Glass industry", "Textile industry"],
     properties: [
       { k: "Route", v: "Hydrometallurgy" },
-      { k: "Status", v: "In development" },
       { k: "Form", v: "Crystalline salt" },
     ],
     accent: "#2F4E3E",
@@ -67,12 +64,11 @@ const products = [
     formula: "Fe₂O₃ · Cr₂O₃ · NiO",
     symbol: "Ox",
     description:
-      "Iron, chromium and nickel oxides recovered as fine powders. High-value raw materials for pigment, ceramic, magnetic and catalytic applications.",
-    markets: ["Pigments & ceramics", "Magnetic & catalytic"],
+      "Iron, chromium and nickel oxides recovered as fine powders. High-value raw materials for pigment, ceramic, and chemical-manufacturing applications.",
+    markets: ["Pigments & ceramics", "Chemical manufacturing"],
     properties: [
       { k: "Route", v: "Hydrometallurgy" },
       { k: "Form", v: "Fine powders" },
-      { k: "Composition", v: "Fe, Cr, Ni oxides" },
     ],
     accent: "#4A7C4E",
     fg: "#0E2F23",
@@ -82,18 +78,17 @@ const products = [
     id: "bricks",
     streamTag: "S09",
     name: "Cement-less bricks",
-    formula: "19–20 kg/sq mm",
+    formula: "Cement-less bricks",
     symbol: "B",
     description:
       "Made from residual metal dust, with metal waste replacing cement. Patented. Compressive strength markedly higher than conventional fly-ash bricks at ~8.5 kg/sq mm.",
-    markets: ["Homes & partition walls", "Parking lots, pre-cast walls, hollow blocks"],
+    markets: ["Homes & partition walls", "Parking lots & pre-cast walls", "Green buildings"],
     properties: [
-      { k: "Patent", v: "Granted · Indian" },
-      { k: "Strength", v: "19–20 kg/sq mm" },
-      { k: "vs Fly-ash", v: "~ 2.3×" },
+      { k: "Form", v: "Hollow blocks or paver blocks" },
+      { k: "Route", v: "Brick manufacturing machines" },
     ],
-    accent: "#8B4A2A",
-    fg: "#F5F1E8",
+    accent: "#6B8E5A",
+    fg: "#0E2F23",
     pattern: "bricks",
   },
 ];
@@ -234,10 +229,10 @@ function SpecimenCard({
         </div>
 
         {/* Big formula in centre */}
-        <div className="absolute inset-0 grid place-items-center pt-4 pb-12 px-4">
+        <div className="absolute inset-0 grid place-items-center pt-4 pb-12 px-3">
           <div className="text-center">
             <div
-              className="font-display text-2xl sm:text-3xl tracking-tight leading-none"
+              className="font-display text-xl sm:text-2xl tracking-tight leading-[1.1] break-words"
               style={{ color: product.fg }}
             >
               {product.formula}
@@ -345,7 +340,7 @@ function DatasheetPanel({
                   Specimen · {product.streamTag}
                 </div>
                 <div
-                  className="font-display text-3xl sm:text-4xl tracking-tight text-center"
+                  className="font-display text-2xl sm:text-3xl tracking-tight text-center leading-[1.1] break-words"
                   style={{ color: product.fg }}
                 >
                   {product.formula}

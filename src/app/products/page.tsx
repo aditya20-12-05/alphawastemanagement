@@ -18,10 +18,10 @@ export default function ProductsPage() {
         title="What we produce."
         subtitle="Five output streams come out of the process. Every one of them has an existing industrial market."
         meta={[
-          { label: "Streams", value: "Five" },
-          { label: "Brick strength", value: "19–20 kg/sq mm" },
-          { label: "Fly-ash comparison", value: "≈ 2.3×" },
-          { label: "Approved use", value: "Homes · blocks" },
+          { label: "Used in", value: "Agriculture" },
+          { label: "Used in", value: "Construction" },
+          { label: "Used in", value: "Ceramic industry" },
+          { label: "Used in", value: "Metal industry" },
         ]}
       />
       <ProductsShowcase />
