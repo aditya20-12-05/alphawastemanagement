@@ -7,18 +7,18 @@ export default function AboutWhatIs() {
   return (
     <div className="rounded-3xl border border-line bg-ivory p-7 sm:p-10 flex flex-col">
       <div className="text-center">
-        <SectionLabel number="§ 01" title="What Alpha is" />
-        <motion.h2
+        <SectionLabel number="§ 01" title="What Alpha is" prominent />
+        <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-5 font-display text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.25] text-ink"
+          className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-xl"
         >
           Alpha collects industrial steel waste and valorizes it into saleable
           products, with{" "}
           <span className="text-forest italic">zero residue</span> at the end.
-        </motion.h2>
+        </motion.p>
       </div>
 
       <div className="mt-6 space-y-4 text-base text-graphite leading-relaxed">
@@ -28,7 +28,7 @@ export default function AboutWhatIs() {
           authorities, and it doesn&apos;t make the waste go away.
         </p>
         <p>
-          Alpha takes the waste in, runs it through four patented stages, and
+          Alpha takes the waste in, runs it through patented stages, and
           ships saleable output back out. Nothing leaves the site as residue.
         </p>
       </div>

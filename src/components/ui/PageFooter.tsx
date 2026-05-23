@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Logo } from "@/components/ui/Logo";
 
 const columns = [
   {
@@ -45,9 +44,8 @@ export default function PageFooter() {
 
         <div className="mt-16 grid lg:grid-cols-12 gap-12 pb-12 border-b border-paper/10">
           <div className="lg:col-span-5">
-            <Link href="/" className="inline-flex items-center gap-2.5">
-              <Logo className="h-8 w-8 text-fern" />
-              <span className="flex flex-col items-center leading-none">
+            <Link href="/" className="inline-block">
+              <span className="flex flex-col items-start leading-none">
                 <span className="font-display text-xl text-paper">Alpha</span>
                 <span className="mt-1 text-[9px] font-sans font-medium uppercase tracking-[0.22em] text-fern/80">
                   Waste Management

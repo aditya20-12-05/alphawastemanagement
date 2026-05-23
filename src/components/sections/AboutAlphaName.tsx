@@ -12,16 +12,16 @@ export default function AboutAlphaName() {
       </div>
 
       <div className="relative text-center">
-        <SectionLabel number="§ 02" title="Why the name" variant="dark" />
-        <motion.h2
+        <SectionLabel number="§ 02" title="Why the name" variant="dark" prominent />
+        <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-5 font-display text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.25]"
+          className="mt-5 text-base sm:text-[17px] text-paper/85 leading-relaxed mx-auto max-w-xl"
         >
           <span className="text-fern italic">Alpha</span> means first.
-        </motion.h2>
+        </motion.p>
       </div>
 
       <div className="relative mt-6 space-y-4 text-base text-paper/80 leading-relaxed">

@@ -104,23 +104,26 @@ export default function ProcessStages() {
       <div className="sticky top-0 h-screen overflow-hidden bg-forest text-paper">
         <BackgroundDetail />
 
-        <div className="relative h-full flex flex-col px-6 sm:px-8">
+        <div className="relative h-full flex flex-col px-5 sm:px-8">
           {/* Header pinned through the whole experience */}
-          <div className="pt-24 sm:pt-28 pb-2 max-w-3xl mx-auto w-full text-center">
-            <SectionLabel number="§ 02" title="The Four Stages" variant="dark" />
-            <h2 className="mt-5 font-display text-[clamp(1.6rem,3.4vw,2.4rem)] leading-[1.15] tracking-tight">
-              Four stages, one closed loop.
+          <div className="pt-16 sm:pt-28 pb-2 max-w-3xl mx-auto w-full text-center">
+            <SectionLabel number="§ 02" title="The Stages" variant="dark" />
+            <h2 className="mt-4 sm:mt-5 font-display text-[clamp(1.35rem,3.4vw,2.4rem)] leading-[1.15] tracking-tight">
+              Patented stages, one closed loop.
             </h2>
-            <p className="mt-4 text-sm text-paper/75 leading-relaxed mx-auto max-w-xl">
-              Four sequential stages convert incoming waste into saleable output.
+            <p className="hidden sm:block mt-4 text-sm text-paper/75 leading-relaxed mx-auto max-w-xl">
+              Sequential stages convert incoming waste into saleable output.
               The brick step is patented; recovery and hydromet are protected by
               additional filings.
             </p>
           </div>
 
-          <div className="flex-1 max-w-7xl mx-auto w-full flex items-center">
-            <div className="grid lg:grid-cols-12 gap-10 items-center w-full">
-              <div className="lg:col-span-5 order-2 lg:order-1">
+          {/* `min-h-0` lets this flex item shrink past content size so the
+              circular visual doesn't push the text off-screen on phones. */}
+          <div className="flex-1 min-h-0 max-w-7xl mx-auto w-full flex items-center py-4">
+            <div className="grid lg:grid-cols-12 gap-6 sm:gap-10 items-center w-full">
+              {/* On mobile: text on top so the stage name + subtitle is never the thing that clips. */}
+              <div className="lg:col-span-5 order-1 text-center lg:text-left">
                 <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-fern/70">
                   Stage {String(active + 1).padStart(2, "0")} / {String(stages.length).padStart(2, "0")}
                 </div>
@@ -132,28 +135,28 @@ export default function ProcessStages() {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <h3 className="mt-3 font-display text-3xl sm:text-5xl tracking-tight leading-[1.05]">
+                    <h3 className="mt-2 sm:mt-3 font-display text-2xl sm:text-5xl tracking-tight leading-[1.05]">
                       {stages[active].title}
                     </h3>
-                    <p className="mt-3 text-base sm:text-lg text-fern italic">{stages[active].short}</p>
-                    <div className="mt-7 inline-flex items-center gap-3 px-4 py-2.5 rounded-full glass-forest">
+                    <p className="mt-2 sm:mt-3 text-sm sm:text-lg text-fern italic">{stages[active].short}</p>
+                    <div className="mt-4 sm:mt-7 inline-flex items-center gap-3 px-4 py-2 sm:py-2.5 rounded-full glass-forest">
                       <span className="text-[10px] font-mono uppercase tracking-[0.22em] text-fern/85">
                         Output →
                       </span>
-                      <span className="text-sm text-paper">{stages[active].output}</span>
+                      <span className="text-[13px] sm:text-sm text-paper">{stages[active].output}</span>
                     </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              <div className="lg:col-span-7 order-1 lg:order-2">
+              <div className="lg:col-span-7 order-2">
                 <StageVisual active={active} />
               </div>
             </div>
           </div>
 
           {/* Progress strip */}
-          <div className="max-w-7xl mx-auto w-full pb-12 sm:pb-14">
+          <div className="max-w-7xl mx-auto w-full pb-8 sm:pb-14">
             <div className="relative">
               <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-px bg-paper/15" />
               <div
@@ -188,7 +191,7 @@ export default function ProcessStages() {
                       />
                     </div>
                     <span
-                      className={`mt-3 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.22em] transition-colors ${
+                      className={`mt-2 sm:mt-3 text-[9px] sm:text-[11px] font-mono uppercase tracking-[0.14em] sm:tracking-[0.22em] transition-colors whitespace-nowrap ${
                         i === active ? "text-fern" : "text-paper/50"
                       }`}
                     >
@@ -226,7 +229,7 @@ function BackgroundDetail() {
 
 function StageVisual({ active }: { active: number }) {
   return (
-    <div className="relative aspect-square max-w-[440px] mx-auto">
+    <div className="relative aspect-square max-w-[240px] sm:max-w-[340px] lg:max-w-[440px] mx-auto">
       <div className="absolute inset-0 rounded-full border border-paper/15" />
       <div className="absolute inset-8 rounded-full border border-paper/10" />
       <div className="absolute inset-16 rounded-full border border-paper/10" />
@@ -252,11 +255,11 @@ function StageVisual({ active }: { active: number }) {
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl glass-forest grid place-items-center"
+                className="w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-2xl glass-forest grid place-items-center"
               >
                 <div className="text-center">
-                  <div className="font-display text-2xl sm:text-3xl text-fern">0{s.id}</div>
-                  <div className="text-[9px] uppercase tracking-[0.18em] text-paper/70 mt-1 px-1">
+                  <div className="font-display text-lg sm:text-2xl lg:text-3xl text-fern">0{s.id}</div>
+                  <div className="text-[8px] sm:text-[9px] uppercase tracking-[0.18em] text-paper/70 mt-0.5 sm:mt-1 px-1">
                     {s.chip}
                   </div>
                 </div>
@@ -277,16 +280,16 @@ function StageVisual({ active }: { active: number }) {
             className="text-center"
           >
             <div
-              className="w-32 h-32 sm:w-36 sm:h-36 rounded-full grid place-items-center"
+              className="w-24 h-24 sm:w-32 sm:h-32 lg:w-36 lg:h-36 rounded-full grid place-items-center"
               style={{
                 background: `radial-gradient(circle, ${stages[active].color}cc 0%, ${stages[active].color}22 60%, transparent 80%)`,
               }}
             >
               <div>
-                <div className="font-display text-5xl sm:text-6xl text-fern tabular-nums">
+                <div className="font-display text-4xl sm:text-5xl lg:text-6xl text-fern tabular-nums">
                   0{active + 1}
                 </div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-paper/70 mt-1">
+                <div className="text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.28em] text-paper/70 mt-1">
                   Active stage
                 </div>
               </div>

@@ -9,7 +9,7 @@ import NextPageCTA from "@/components/ui/NextPageCTA";
 export const metadata: Metadata = {
   title: "The Process. Alpha Waste Management",
   description:
-    "Four patented stages turning industrial waste into saleable output: metal segregation, metal recovery, hydrometallurgy, and cement-less brick manufacturing. 100% mass balance.",
+    "Patented stages turning industrial waste into saleable output: metal segregation, metal recovery, hydrometallurgy, and cement-less brick manufacturing. 100% mass balance.",
 };
 
 export default function ProcessPage() {

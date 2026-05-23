@@ -18,7 +18,7 @@ const tiles = [
     title: "Process",
     meta: "Chapter II",
     body:
-      "Four patented stages: segregation, metal recovery, hydrometallurgy, and cement-less brick manufacturing.",
+      "Patented stages: segregation, metal recovery, hydrometallurgy, and cement-less brick manufacturing.",
     accent: "#1F3A2E",
   },
   {

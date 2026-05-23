@@ -398,8 +398,7 @@ function ContactForm({
         </h3>
         <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl">
           Pick the engagement that fits and tell us a little about your
-          situation. We respond with a structured next step within two working
-          days.
+          situation. We&apos;ll come back with a structured next step.
         </p>
       </div>
 

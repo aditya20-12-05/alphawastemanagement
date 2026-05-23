@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Logo } from "@/components/ui/Logo";
-
 const links = [
   { label: "About", href: "/about" },
   { label: "Process", href: "/process" },
@@ -48,9 +46,8 @@ export default function Navigation() {
           transition={{ duration: 0.4, ease: "easeOut" }}
           className="mx-auto max-w-7xl rounded-full border px-5 sm:px-6 backdrop-blur-xl flex items-center justify-between"
         >
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <Logo className="h-7 w-7 text-forest transition-transform duration-700 group-hover:rotate-180" />
-            <span className="flex flex-col items-center leading-none">
+          <Link href="/" className="group">
+            <span className="flex flex-col items-start leading-none">
               <span className="font-display text-lg sm:text-xl tracking-tight text-forest">
                 Alpha
               </span>

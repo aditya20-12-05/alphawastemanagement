@@ -71,19 +71,19 @@ export default function AboutMarket() {
   return (
     <div className="rounded-3xl border border-line bg-ivory p-7 sm:p-10 lg:col-span-2 overflow-hidden">
       <div className="text-center max-w-3xl mx-auto">
-        <SectionLabel number="§ 05" title="Market potential" />
-        <motion.h2
+        <SectionLabel number="§ 05" title="Market potential" prominent />
+        <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-5 font-display text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.2] text-ink"
+          className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-2xl"
         >
           Steel-making is one of the world&apos;s largest sources of industrial
           waste. The appetite for the recovered outputs is{" "}
           <span className="text-forest italic">global</span>.
-        </motion.h2>
-        <p className="mt-5 text-base text-graphite leading-relaxed mx-auto max-w-2xl">
+        </motion.p>
+        <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-2xl">
           Carbon-border mechanisms, recycled-content mandates, and tightening
           environmental rules across major economies have turned waste recovery
           from a compliance cost into a market.

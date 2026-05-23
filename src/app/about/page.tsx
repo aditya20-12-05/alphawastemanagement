@@ -40,7 +40,7 @@ export default function AboutPage() {
         href="/process"
         meta="Chapter II"
         title="See the process."
-        body="Four patented stages turn hazardous waste into saleable output."
+        body="Patented stages turn hazardous waste into saleable output."
       />
       <PageFooter />
     </main>
