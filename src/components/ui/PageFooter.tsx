@@ -48,9 +48,9 @@ export default function PageFooter() {
           <div className="lg:col-span-5">
             <Link href="/" className="inline-flex items-center gap-2.5">
               <Logo className="h-8 w-8 text-fern" />
-              <span className="font-display text-xl text-paper">
-                Alpha
-                <span className="text-fern/70 ml-1.5 text-[10px] font-sans font-medium uppercase tracking-[0.22em] align-middle">
+              <span className="flex flex-col items-start leading-none">
+                <span className="font-display text-xl text-paper">Alpha</span>
+                <span className="mt-1 text-[9px] font-sans font-medium uppercase tracking-[0.22em] text-fern/80">
                   Waste Management
                 </span>
               </span>

@@ -50,9 +50,11 @@ export default function Navigation() {
         >
           <Link href="/" className="flex items-center gap-2.5 group">
             <Logo className="h-7 w-7 text-forest transition-transform duration-700 group-hover:rotate-180" />
-            <span className="font-display text-lg sm:text-xl tracking-tight">
-              <span className="text-forest">Alpha</span>
-              <span className="text-muted ml-1.5 text-[10px] sm:text-xs font-sans font-medium uppercase tracking-[0.18em] align-middle">
+            <span className="flex flex-col items-start leading-none">
+              <span className="font-display text-lg sm:text-xl tracking-tight text-forest">
+                Alpha
+              </span>
+              <span className="mt-0.5 text-[8px] sm:text-[9px] font-sans font-medium uppercase tracking-[0.22em] text-muted">
                 Waste Management
               </span>
             </span>
