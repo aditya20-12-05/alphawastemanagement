@@ -22,12 +22,6 @@ export default function AboutPage() {
         eyebrow="About · Chapter I"
         title="About Alpha."
         subtitle={<AboutSubheading />}
-        meta={[
-          { label: "Pilot today", value: "180 tonnes/mo" },
-          { label: "Patents", value: "7 + 3 in dev" },
-          { label: "PLI", value: "Approved" },
-          { label: "Backed by", value: "38-yr parent" },
-        ]}
       />
 
       {/* Two-column block grid */}
