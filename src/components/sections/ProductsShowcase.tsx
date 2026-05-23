@@ -367,8 +367,15 @@ function DatasheetPanel({
               {product.description}
             </p>
 
-            {/* Properties table */}
-            <div className="mt-7 grid sm:grid-cols-3 gap-px bg-line border border-line rounded-2xl overflow-hidden">
+            {/* Properties table — columns scale to property count so we never
+                 leave an empty cell trailing. */}
+            <div
+              className={`mt-7 grid gap-px bg-line border border-line rounded-2xl overflow-hidden ${
+                product.properties.length >= 3
+                  ? "sm:grid-cols-3"
+                  : "sm:grid-cols-2"
+              }`}
+            >
               {product.properties.map((p) => (
                 <div key={p.k} className="bg-paper p-4">
                   <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted">
