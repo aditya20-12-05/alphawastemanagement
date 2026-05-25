@@ -23,10 +23,18 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = "https://www.alphawastemanagement.com";
+const SITE_TITLE = "Alpha Waste Management · Industry waste turned into revenue";
+const SITE_DESCRIPTION =
+  "A Mangalam Alloys Ltd. (MAL) venture. Patented zero-residue valorization for industrial steel waste. 100% mass balance, commercial scale, regional hubs across India.";
+
 export const metadata: Metadata = {
-  title: "Alpha Waste Management · Industry waste turned into revenue",
-  description:
-    "A Mangalam Alloys Ltd. (MAL) venture. Patented zero-residue valorization for industrial steel waste. 100% mass balance, commercial scale, regional hubs across India.",
+  /* metadataBase makes any relative URLs in openGraph / twitter / alternates
+     resolve against the production domain. Required for share previews on
+     WhatsApp, LinkedIn, Slack, etc. to render correctly. */
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   keywords: [
     "Alpha Waste Management",
     "Mangalam Alloys",
@@ -38,6 +46,22 @@ export const metadata: Metadata = {
     "hydrometallurgy",
     "cement-less bricks",
   ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: "Alpha Waste Management",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
