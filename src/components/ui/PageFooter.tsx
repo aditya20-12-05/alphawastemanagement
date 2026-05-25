@@ -25,7 +25,7 @@ const columns = [
   {
     title: "Parent",
     links: [
-      { label: "Mangalam Alloys Ltd.", href: "/about" },
+      { label: "Mangalam Alloys Ltd. (MAL)", href: "/about" },
       { label: "DSIR R&D centre", href: "/about" },
       { label: "Ahmedabad, Gujarat", href: "/about" },
     ],
@@ -53,7 +53,7 @@ export default function PageFooter() {
               </span>
             </Link>
             <p className="mt-5 text-sm text-paper/65 max-w-sm leading-relaxed">
-              A waste-valorization venture of Mangalam Alloys Ltd. Patented technology operating today, now scaling to industrial throughput.
+              A waste-valorization venture of Mangalam Alloys Ltd. (MAL). Patented technology operating today, now scaling to industrial throughput.
               Government of India PLI approval secured for commercial scale-up.
             </p>
 
@@ -90,7 +90,7 @@ export default function PageFooter() {
 
         <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-[11px] text-paper/60">
           <div className="font-mono uppercase tracking-[0.22em]">
-            © {new Date().getFullYear()} Alpha Waste Management · A Mangalam Alloys Ltd. Venture
+            © {new Date().getFullYear()} Alpha Waste Management · A Mangalam Alloys Ltd. (MAL) Venture
           </div>
           <div className="flex gap-5 font-mono uppercase tracking-[0.22em]">
             <Link href="/" className="hover:text-fern transition-colors">Privacy</Link>

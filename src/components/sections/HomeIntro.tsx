@@ -17,7 +17,7 @@ export default function HomeIntro() {
           className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] font-mono text-muted"
         >
           <span className="h-px w-10 bg-forest" />
-          A Mangalam Alloys Ltd. venture · Ahmedabad, Gujarat
+          A Mangalam Alloys Ltd. (MAL) venture · Ahmedabad, Gujarat
           <span className="h-px w-10 bg-forest" />
         </motion.div>
 
@@ -66,7 +66,7 @@ export default function HomeIntro() {
           className="mt-10 mx-auto max-w-2xl text-base sm:text-lg text-graphite leading-relaxed"
         >
           Alpha Waste Management is the waste-valorization venture of Mangalam Alloys
-          Ltd., a 38-year-old steel manufacturer with a government-recognised
+          Ltd. (MAL), a 38-year-old steel manufacturer with a government-recognised
           R&amp;D centre. We valorize industrial waste into recovered metals,
           gypsum, sodium sulphate, metal-oxide powders, and cement-less bricks.
           Pilot scale today; commercial scale-up underway under Government of India

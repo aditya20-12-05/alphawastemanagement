@@ -25,14 +25,14 @@ export default function AboutParent() {
           className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-xl"
         >
           Alpha is the venture of{" "}
-          <span className="text-forest">Mangalam Alloys Ltd.</span>, a
+          <span className="text-forest">Mangalam Alloys Ltd. (MAL)</span>, a
           38-year stainless-steel manufacturer in Ahmedabad.
         </motion.p>
       </div>
 
       <div className="mt-6 space-y-4 text-base text-graphite leading-relaxed">
         <p>
-          Being a leading manufacturer of stainless steel, Mangalam has spent
+          Being a leading manufacturer of stainless steel, MAL has spent
           decades researching how to handle steel waste responsibly, operating a
           government-recognised in-house R&amp;D centre dedicated to it.
         </p>

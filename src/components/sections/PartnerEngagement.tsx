@@ -120,14 +120,14 @@ export default function PartnerEngagement() {
 
         <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
           <div className="mx-auto max-w-3xl text-center">
-            <SectionLabel number="§ 01" title="Engagement modes" />
+            <SectionLabel number="§ 01" title="Engagement modes" prominent />
             <Reveal direction="up">
-              <h2 className="mt-6 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.2] text-ink">
+              <p className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-xl">
                 Four ways to work with us.
-              </h2>
+              </p>
             </Reveal>
             <Reveal direction="up" delay={0.1}>
-              <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl">
+              <p className="mt-3 text-base text-graphite leading-relaxed mx-auto max-w-xl">
                 Each engagement shares the same operational core. They differ in
                 who funds the build, who runs the line, and where Alpha sits in
                 the value chain.
@@ -392,11 +392,11 @@ function ContactForm({
   return (
     <Reveal direction="up">
       <div className="mx-auto max-w-3xl text-center">
-        <SectionLabel number="§ 02" title="Get in touch" />
-        <h3 className="mt-6 font-display text-[clamp(1.8rem,3.5vw,2.8rem)] leading-[1.1] text-ink">
+        <SectionLabel number="§ 02" title="Get in touch" prominent />
+        <p className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-xl">
           Start a conversation.
-        </h3>
-        <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl">
+        </p>
+        <p className="mt-3 text-base text-graphite leading-relaxed mx-auto max-w-xl">
           Pick the engagement that fits and tell us a little about your
           situation. We&apos;ll come back with a structured next step.
         </p>

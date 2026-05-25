@@ -25,23 +25,23 @@ export default function ProcessProblem() {
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <SectionLabel number="§ 01" title="The Difficulty" />
+          <SectionLabel number="§ 01" title="The Difficulty" prominent />
 
-          <motion.h2
+          <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 font-display text-[clamp(1.8rem,4vw,3rem)] leading-[1.1] tracking-tight"
+            className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-xl"
           >
             Steel-making generates waste at every stage.
-          </motion.h2>
+          </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-5 text-base text-graphite leading-relaxed mx-auto max-w-xl"
+            className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl"
           >
             Steel is iron with different alloying elements added in different
             proportions. The amount of chromium and other alloys is what makes

@@ -106,14 +106,14 @@ export default function ProductsShowcase() {
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <SectionLabel number="§ 01" title="The Five Streams" />
+          <SectionLabel number="§ 01" title="The Five Streams" prominent />
           <Reveal direction="up">
-            <h2 className="mt-6 font-display text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.2] text-ink">
+            <p className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-xl">
               Five output streams.
-            </h2>
+            </p>
           </Reveal>
           <Reveal direction="up" delay={0.1}>
-            <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl">
+            <p className="mt-3 text-base text-graphite leading-relaxed mx-auto max-w-xl">
               Each card below represents one output of the process. Tap or click to see
               its full datasheet: what it is, the route that produces it, and where it goes.
             </p>

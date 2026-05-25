@@ -17,23 +17,23 @@ export default function ProcessPilot() {
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <SectionLabel number="§ 03" title="Pilot Proof" />
+          <SectionLabel number="§ 03" title="Pilot Proof" prominent />
 
-          <motion.h2
+          <motion.p
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 font-display text-[clamp(1.8rem,4vw,3rem)] leading-[1.1] tracking-tight"
+            className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-xl"
           >
-            Operating today, inside Mangalam.
-          </motion.h2>
+            Operating today, inside Mangalam Alloys Ltd. (MAL).
+          </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-5 text-base text-graphite leading-relaxed mx-auto max-w-xl"
+            className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-xl"
           >
             The full process is running as a lab-based pilot plant. Approximately 180
             tonnes of waste are recycled every month, with patented processes

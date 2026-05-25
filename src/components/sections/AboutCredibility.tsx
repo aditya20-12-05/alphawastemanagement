@@ -45,8 +45,8 @@ export default function AboutCredibility() {
       <div className="mt-6 space-y-4 text-base text-graphite leading-relaxed">
         <p>
           This isn&apos;t a pitch-deck venture. The process is running inside
-          Mangalam right now, valorizing approximately 180 tonnes of industrial
-          waste each month under patented technology.
+          Mangalam Alloys Ltd. (MAL) right now, valorizing approximately 180
+          tonnes of industrial waste each month under patented technology.
         </p>
         <p>
           Seven patents have been granted (Indian and international), with three

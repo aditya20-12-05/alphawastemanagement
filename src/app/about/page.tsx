@@ -7,6 +7,7 @@ import AboutAlphaName from "@/components/sections/AboutAlphaName";
 import AboutParent from "@/components/sections/AboutParent";
 import AboutCredibility from "@/components/sections/AboutCredibility";
 import AboutMarket from "@/components/sections/AboutMarket";
+import AboutSDGs from "@/components/sections/AboutSDGs";
 import NextPageCTA from "@/components/ui/NextPageCTA";
 
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export default function AboutPage() {
           <AboutParent />
           <AboutCredibility />
           <AboutMarket />
+          <AboutSDGs />
         </div>
       </section>
 
