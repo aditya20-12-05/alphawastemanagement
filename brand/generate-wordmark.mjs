@@ -14,7 +14,8 @@
    Run with:   node brand/generate-wordmark.mjs
 
    Outputs to brand/:
-     alpha-wordmark-4000.png   · 4000×~1500 px master (print + large format)
+     alpha-wordmark-8000.png   · 8000×~3400 px · highest quality master
+     alpha-wordmark-4000.png   · 4000×~1700 px · print + large format
      alpha-wordmark-2000.png   · half-resolution working size
      alpha-wordmark-1000.png   · web / signature size
      alpha-wordmark-500.png    · small / inline
@@ -28,9 +29,13 @@ import { dirname, join } from "node:path";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
-/* Brand colour. Same lighter shade we used on the monogram — visible on
-   light backgrounds, holds presence under a B&W print conversion. */
+/* Brand colours.
+   - GREEN: sage, used on 'Alpha'. Lighter than forest so it survives a
+     B&W print without washing out.
+   - GREY: the brand 'muted' tone (same value used on the website nav for
+     the 'Waste Management' subtitle). Warm, paper-aware. */
 const GREEN = "#4A7C4E";
+const GREY = "#6B6862";
 
 /* --- Font loading --------------------------------------------------------
    Pull the same families the website uses, directly from Google Fonts so
@@ -85,8 +90,12 @@ console.log("Fonts ready.");
    The container has no background — we'll emit a transparent PNG so the
    logo can be placed on any colour. */
 
+/* Master canvas for satori. We render once at this size and resvg
+   rasterises at multiple output sizes. The dimensions don't bound the
+   final quality — glyphs are flattened to SVG paths — but they need to
+   accommodate the layout + breathing room around the wordmark. */
 const MASTER_WIDTH = 4000;
-const MASTER_HEIGHT = 1500;
+const MASTER_HEIGHT = 1700;
 
 const jsx = {
   type: "div",
@@ -116,17 +125,18 @@ const jsx = {
           children: "Alpha",
         },
       },
-      // "WASTE MANAGEMENT" — bold, uppercase, tracked, perfectly centred.
+      // "WASTE MANAGEMENT" — bold, uppercase, tracked, in muted grey,
+      // perfectly centred below "Alpha" with a comfortable gap.
       {
         type: "div",
         props: {
           style: {
-            marginTop: 56,
+            marginTop: 140,
             fontFamily: "Inter",
             fontSize: 132,
             fontWeight: 800,
             textTransform: "uppercase",
-            color: GREEN,
+            color: GREY,
             letterSpacing: "0.38em",
             // Offset right by half the letter-spacing so the visual block
             // (which is shifted left by the trailing-spacing convention)
@@ -151,8 +161,9 @@ const svg = await satori(jsx, {
   ],
 });
 
-console.log("Rasterising at four sizes…");
-const SIZES = [4000, 2000, 1000, 500];
+console.log("Rasterising at five sizes…");
+/* 8000 is the new highest-quality master — print/large-format ready. */
+const SIZES = [8000, 4000, 2000, 1000, 500];
 
 for (const w of SIZES) {
   const fitToWidth = w;
