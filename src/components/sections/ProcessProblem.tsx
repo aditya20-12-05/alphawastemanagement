@@ -25,7 +25,7 @@ export default function ProcessProblem() {
 
       <div className="relative mx-auto max-w-7xl px-6 sm:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <SectionLabel number="§ 01" title="The Difficulty" prominent />
+          <SectionLabel number="§ 01" title="Where the waste comes from" prominent />
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -89,12 +89,17 @@ export default function ProcessProblem() {
         </Reveal>
 
         <div className="mt-20 mx-auto max-w-3xl text-center">
-          <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-muted">
-            Waste generated per stage
+          <div className="flex items-center justify-center gap-3 text-[10px] font-mono uppercase tracking-[0.28em]">
+            <span className="h-px w-8 bg-line" />
+            <span className="text-sage">Per stage</span>
+            <span className="h-px w-8 bg-line" />
           </div>
-          <h3 className="mt-3 font-display text-2xl sm:text-3xl text-ink leading-tight">
-            Three stages, one hazardous fraction.
+          <h3 className="mt-3 font-display text-[clamp(1.5rem,2.6vw,2.05rem)] leading-[1.15] tracking-tight text-ink">
+            Waste generated per stage
           </h3>
+          <p className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-xl">
+            Three stages, one hazardous fraction.
+          </p>
           <p className="mt-3 text-base text-graphite leading-relaxed mx-auto max-w-xl">
             Every metal that is melted passes through melting, rolling and finishing.
             Each stage generates waste; finishing produces the bulk of the hazardous
