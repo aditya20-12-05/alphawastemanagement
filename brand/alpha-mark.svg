@@ -1,0 +1,39 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1024 1024"
+  width="1024"
+  height="1024"
+>
+  <!-- Background tile · sage green (brand) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="180" ry="180" fill="#4A7C4E" />
+
+  <!-- Inner outline ring · subtle paper-coloured detail at low opacity -->
+  <rect
+    x="56"
+    y="56"
+    width="912"
+    height="912"
+    rx="138"
+    ry="138"
+    fill="none"
+    stroke="#F5F1E8"
+    stroke-opacity="0.18"
+    stroke-width="4"
+  />
+
+  <!-- "A" glyph · stroked geometry, all paths (no font) -->
+  <g
+    stroke="#F5F1E8"
+    stroke-width="84"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  >
+    <!-- Left leg: bottom-left → apex -->
+    <line x1="262" y1="804" x2="512" y2="228" />
+    <!-- Right leg: apex → bottom-right -->
+    <line x1="512" y1="228" x2="762" y2="804" />
+    <!-- Crossbar -->
+    <line x1="362" y1="592" x2="662" y2="592" />
+  </g>
+</svg>
