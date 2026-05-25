@@ -51,7 +51,8 @@ export default function ProcessProblem() {
 
         <Reveal className="mt-14" direction="up">
           <div className="rounded-2xl border border-line bg-ivory overflow-hidden">
-            <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-line bg-cream/50 text-[10px] font-mono uppercase tracking-[0.22em] text-muted">
+            {/* Column headers — only useful when laid out as a table (≥ sm). */}
+            <div className="hidden sm:grid grid-cols-12 gap-4 px-6 py-3 border-b border-line bg-cream/50 text-[10px] font-mono uppercase tracking-[0.22em] text-muted">
               <div className="col-span-3">Category</div>
               <div className="col-span-5">Defining feature</div>
               <div className="col-span-4">Typical use</div>
@@ -63,13 +64,17 @@ export default function ProcessProblem() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
-                className="grid grid-cols-12 gap-4 px-6 py-5 border-b border-line last:border-0"
+                className="block sm:grid sm:grid-cols-12 sm:gap-4 px-5 sm:px-6 py-5 border-b border-line last:border-0"
               >
-                <div className="col-span-3">
-                  <div className="font-display text-base sm:text-lg text-ink leading-tight">
+                {/* Category — also the row title on mobile. */}
+                <div className="sm:col-span-3">
+                  <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted sm:hidden">
+                    Category
+                  </div>
+                  <div className="mt-0.5 sm:mt-0 font-display text-base sm:text-lg text-ink leading-tight">
                     {g.name}
                   </div>
-                  <div className="mt-1 flex items-center gap-0.5">
+                  <div className="mt-1.5 flex items-center gap-0.5">
                     {Array.from({ length: 4 }).map((_, j) => (
                       <span
                         key={j}
@@ -78,8 +83,18 @@ export default function ProcessProblem() {
                     ))}
                   </div>
                 </div>
-                <div className="col-span-5 text-sm text-graphite leading-snug">{g.note}</div>
-                <div className="col-span-4 text-sm text-graphite leading-snug">{g.use}</div>
+                <div className="mt-3 sm:mt-0 sm:col-span-5">
+                  <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted sm:hidden">
+                    Defining feature
+                  </div>
+                  <div className="mt-0.5 sm:mt-0 text-sm text-graphite leading-snug">{g.note}</div>
+                </div>
+                <div className="mt-3 sm:mt-0 sm:col-span-4">
+                  <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-muted sm:hidden">
+                    Typical use
+                  </div>
+                  <div className="mt-0.5 sm:mt-0 text-sm text-graphite leading-snug">{g.use}</div>
+                </div>
               </motion.div>
             ))}
           </div>

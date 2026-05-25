@@ -20,6 +20,7 @@ export default function AboutPage() {
   return (
     <main className="relative">
       <PageHero
+        fillViewport
         eyebrow="About"
         title="About Alpha."
         subtitle={<AboutSubheading />}

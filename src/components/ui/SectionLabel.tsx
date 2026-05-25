@@ -30,7 +30,7 @@ export function SectionLabel({
   const titleColor = variant === "dark" ? "text-paper/60" : "text-muted";
   const promTitleColor = variant === "dark" ? "text-paper" : "text-ink";
 
-  // Prominent mode: small chapter chip on top, big display title below.
+  // Prominent mode: small numbered chip on top, big display title below.
   if (prominent) {
     return (
       <motion.div

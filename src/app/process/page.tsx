@@ -16,6 +16,7 @@ export default function ProcessPage() {
   return (
     <main className="relative">
       <PageHero
+        fillViewport
         eyebrow="Process"
         title="How we do it."
         meta={[

@@ -170,9 +170,23 @@ function Card({
   const isActive = offset === 0;
   const visible = abs <= 2;
 
+  const handleActivate = () => {
+    if (!isActive) onClick();
+  };
+
   return (
     <motion.div
-      onClick={() => (isActive ? null : onClick())}
+      role="button"
+      tabIndex={isActive || !visible ? -1 : 0}
+      aria-pressed={isActive}
+      aria-label={`Focus ${tile.title}`}
+      onClick={handleActivate}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleActivate();
+        }
+      }}
       animate={{
         x: `${offset * 240}px`,
         rotateY: `${offset * -24}deg`,
@@ -185,7 +199,7 @@ function Card({
         transformStyle: "preserve-3d",
         pointerEvents: visible ? "auto" : "none",
       }}
-      className="absolute w-[260px] sm:w-[320px] md:w-[360px] aspect-[3/4]"
+      className="absolute w-[260px] sm:w-[320px] md:w-[360px] aspect-[3/4] outline-none focus-visible:ring-2 focus-visible:ring-forest rounded-3xl"
     >
       <motion.div
         animate={{ y: isActive ? [0, -8, 0] : 0 }}

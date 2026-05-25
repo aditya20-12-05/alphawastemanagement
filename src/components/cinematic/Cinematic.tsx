@@ -5,10 +5,10 @@ import { useRef } from "react";
 import { useSectionProgress } from "@/components/ui/useSectionProgress";
 
 /* --------------------------------------------------------------------------
-   ALPHA · PROCESS, IN FOUR CHAPTERS
-   Scroll-constructed flow diagram. The structure and motion are the same
-   as the engineering PFD, but the language is plain English with simple
-   per-stage icons so a non-technical visitor can follow along.
+   ALPHA · HOW IT WORKS — scroll-constructed flow diagram.
+   The structure and motion match the engineering PFD, but the language is
+   plain English with simple per-stage icons so a non-technical visitor
+   can follow along.
 -------------------------------------------------------------------------- */
 
 const PHASES = [
