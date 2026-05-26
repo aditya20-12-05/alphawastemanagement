@@ -27,7 +27,10 @@ export default function ContactForm() {
     if (t) setInterested(t);
   }, [searchParams]);
 
-  const selectedLabel = findEngagement(interested)?.label;
+  const selectedLabel =
+    interested === "other"
+      ? "Other"
+      : findEngagement(interested)?.label;
 
   return (
     <Reveal direction="up">
@@ -78,6 +81,7 @@ export default function ContactForm() {
                   </option>
                 ))}
               </optgroup>
+              <option value="other">Other / not sure</option>
             </select>
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted">
               ▾

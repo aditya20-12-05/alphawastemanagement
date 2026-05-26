@@ -31,11 +31,12 @@ export const services: EngagementModel[] = [
   {
     id: "on-site-processing",
     label: "On-site processing",
-    note: "Alpha installs and operates a unit at your plant.",
+    note: "Producer funds the equipment. Alpha brings the technology.",
     body:
-      "Alpha sets up and runs a dedicated processing line inside the producer's own facility. We fund the equipment, supply the operating team, and take the waste through the full Alpha process on the producer's site. The waste never leaves the boundary; the producer keeps the carbon credits, the CSR narrative, and the ESG reporting.",
+      "Alpha sets up and runs a dedicated processing line inside the producer's own facility. The producer funds the equipment; Alpha provides the patented process, the operating team, and the technical supervision that takes the waste through every stage. The waste never leaves the boundary; the producer keeps the carbon credits, the CSR narrative, and the ESG reporting.",
     bullets: [
-      "Alpha funds and operates the on-site line",
+      "Producer funds the equipment; Alpha provides the technology and operating team",
+      "Alpha installs, commissions, and operates the on-site line",
       "Waste never leaves the producer's premises",
       "Producer retains carbon credits and CSR reporting",
     ],
