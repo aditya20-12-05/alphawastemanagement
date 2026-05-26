@@ -48,11 +48,16 @@ export default function Navigation() {
           className="mx-auto max-w-7xl rounded-full border px-5 sm:px-6 backdrop-blur-xl flex items-center justify-between"
         >
           <Link href="/" className="group">
-            <span className="flex flex-col items-start leading-none">
+            <span className="flex flex-col items-center leading-none">
               <span className="font-display text-lg sm:text-xl tracking-tight text-forest">
                 Alpha
               </span>
-              <span className="mt-0.5 text-[8px] sm:text-[9px] font-sans font-medium uppercase tracking-[0.22em] text-muted">
+              {/* paddingLeft compensates for the trailing letter-spacing —
+                  without it the visual block sits ~0.19em left of centre. */}
+              <span
+                className="mt-1 text-[8px] sm:text-[9px] font-sans font-extrabold uppercase tracking-[0.38em] text-muted"
+                style={{ paddingLeft: "0.38em" }}
+              >
                 Waste Management
               </span>
             </span>

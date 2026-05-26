@@ -46,9 +46,14 @@ export default function PageFooter() {
         <div className="mt-16 grid lg:grid-cols-12 gap-12 pb-12 border-b border-paper/10">
           <div className="lg:col-span-5">
             <Link href="/" className="inline-block">
-              <span className="flex flex-col items-start leading-none">
+              <span className="flex flex-col items-center leading-none">
                 <span className="font-display text-xl text-paper">Alpha</span>
-                <span className="mt-1 text-[9px] font-sans font-medium uppercase tracking-[0.22em] text-fern/80">
+                {/* paddingLeft compensates for the trailing letter-spacing —
+                    without it the visual block sits ~0.19em left of centre. */}
+                <span
+                  className="mt-1.5 text-[9px] font-sans font-extrabold uppercase tracking-[0.38em] text-fern/80"
+                  style={{ paddingLeft: "0.38em" }}
+                >
                   Waste Management
                 </span>
               </span>
