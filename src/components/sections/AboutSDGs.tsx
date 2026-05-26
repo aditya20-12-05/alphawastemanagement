@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 /**
- * UN Sustainable Development Goals that Alpha's work directly contributes
+ * United Nations Sustainable Development Goals that Alpha's work directly contributes
  * to. Five goals chosen on the basis of demonstrable operational overlap:
  * patented industrial innovation (9), construction outputs that support
  * sustainable urbanisation (11), circular product design (12), lower-
@@ -58,7 +58,7 @@ export default function AboutSDGs() {
   return (
     <div className="rounded-3xl border border-line bg-ivory p-7 sm:p-10 lg:col-span-2 overflow-hidden">
       <div className="text-center max-w-3xl mx-auto">
-        <SectionLabel number="§ 06" title="UN Sustainable Goals" prominent />
+        <SectionLabel number="§ 06" title="United Nations Sustainable Goals" prominent />
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,7 +66,7 @@ export default function AboutSDGs() {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mt-5 text-base sm:text-[17px] text-graphite leading-relaxed mx-auto max-w-2xl"
         >
-          Alpha&apos;s work overlaps with five UN Sustainable Development Goals.
+          Alpha&apos;s work overlaps with five United Nations Sustainable Development Goals.
         </motion.p>
         <p className="mt-4 text-base text-graphite leading-relaxed mx-auto max-w-2xl">
           The overlaps are operational, not aspirational — each goal below
