@@ -48,7 +48,7 @@ const products = [
     formula: "Na₂SO₄",
     symbol: "Na",
     description:
-      "A salt recovered from the process. Alpha is developing it into an organic fertilizer, converting a recovery stream into agricultural value.",
+      "A salt recovered from the process. On sodium-sulphate-deficient soils it works as a soil amendment, adding an agronomic outlet to its established industrial markets.",
     markets: ["Detergent industry", "Glass industry", "Textile industry"],
     properties: [
       { k: "Route", v: "Hydrometallurgy" },

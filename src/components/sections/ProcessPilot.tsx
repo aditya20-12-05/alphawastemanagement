@@ -89,11 +89,11 @@ export default function ProcessPilot() {
                 {[
                   {
                     title: "Lithium-battery recovery",
-                    body: "Recovering lithium, cobalt and nickel from spent batteries, over 95% material recovery, cutting India's reliance on imported critical minerals.",
+                    body: "Recovering lithium, cobalt and nickel from spent batteries at over 95% material recovery. A direct answer to India's reliance on imported critical minerals, and to the mounting volume of end-of-life battery waste.",
                   },
                   {
                     title: "Potash fertilizer",
-                    body: "Converting the recovered gypsum stream into Sulphate of Potash, a chloride-free fertilizer, against India's near-total potash import dependence.",
+                    body: "Reacting recovered gypsum with feldspar ore to produce Sulphate of Potash, a premium chloride-free fertilizer. India imports almost all of its potash today, so domestic production from waste streams carries real strategic weight.",
                   },
                 ].map((s) => (
                   <div key={s.title} className="flex gap-4">
