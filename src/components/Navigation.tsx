@@ -8,7 +8,8 @@ const links = [
   { label: "About", href: "/about" },
   { label: "Process", href: "/process" },
   { label: "Products", href: "/products" },
-  { label: "Partner", href: "/partner" },
+  { label: "Services", href: "/services" },
+  { label: "Partnerships", href: "/partnerships" },
 ];
 
 export default function Navigation() {
@@ -83,10 +84,10 @@ export default function Navigation() {
 
           <div className="flex items-center gap-2">
             <Link
-              href="/partner"
+              href="/contact"
               className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-forest text-paper px-4 py-2 text-sm font-medium hover:bg-moss transition-colors group"
             >
-              Partner with us
+              Contact us
               <span className="inline-block transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
             <button
@@ -127,10 +128,10 @@ export default function Navigation() {
                 </Link>
               ))}
               <Link
-                href="/partner"
+                href="/contact"
                 className="mt-2 px-4 py-3 rounded-xl bg-forest text-paper text-center"
               >
-                Partner with us →
+                Contact us →
               </Link>
             </nav>
           </motion.div>

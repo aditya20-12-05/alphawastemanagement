@@ -10,24 +10,25 @@ const columns = [
       { label: "About", href: "/about" },
       { label: "Process", href: "/process" },
       { label: "Products", href: "/products" },
-      { label: "Partner", href: "/partner" },
+      { label: "Services", href: "/services" },
+      { label: "Partnerships", href: "/partnerships" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
-    title: "Engagement",
+    title: "Services",
     links: [
-      { label: "Operations partnership", href: "/partner#operations" },
-      { label: "Investment", href: "/partner#investment" },
-      { label: "Licensing", href: "/partner#licensing" },
-      { label: "Collaboration", href: "/partner#collaboration" },
+      { label: "On-site processing", href: "/services#on-site-processing" },
+      { label: "Collection", href: "/services#collection" },
+      { label: "Advisory & R&D", href: "/services#sustainability-advisory" },
     ],
   },
   {
-    title: "Parent",
+    title: "Partnerships",
     links: [
-      { label: "Mangalam Alloys Ltd. (MAL)", href: "/about" },
-      { label: "DSIR R&D centre", href: "/about" },
-      { label: "Ahmedabad, Gujarat", href: "/about" },
+      { label: "Investment", href: "/partnerships#investment" },
+      { label: "Licensing", href: "/partnerships#licensing" },
+      { label: "Collaboration", href: "/partnerships#collaboration" },
     ],
   },
 ];
@@ -95,7 +96,7 @@ export default function PageFooter() {
           <div className="flex gap-5 font-mono uppercase tracking-[0.22em]">
             <Link href="/" className="hover:text-fern transition-colors">Privacy</Link>
             <Link href="/" className="hover:text-fern transition-colors">Terms</Link>
-            <Link href="/partner" className="hover:text-fern transition-colors">Contact</Link>
+            <Link href="/contact" className="hover:text-fern transition-colors">Contact</Link>
           </div>
         </div>
       </div>

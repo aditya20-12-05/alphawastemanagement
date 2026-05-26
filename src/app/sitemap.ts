@@ -39,10 +39,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${SITE}/partner`,
+      url: `${SITE}/services`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: `${SITE}/partnerships`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE}/contact`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
   ];
 }

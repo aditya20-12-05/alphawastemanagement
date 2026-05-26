@@ -30,11 +30,19 @@ const tiles = [
     accent: "#2F4E3E",
   },
   {
-    href: "/partner",
-    title: "Partner",
+    href: "/services",
+    title: "Services",
     meta: "IV",
     body:
-      "Four ways to engage: operations partnership, investment, licensing, and collaboration.",
+      "Three ways to hand the problem to Alpha: on-site processing, collection, or sustainability advisory + R&D.",
+    accent: "#3A6240",
+  },
+  {
+    href: "/partnerships",
+    title: "Partnerships",
+    meta: "V",
+    body:
+      "Three ways to engage on capital, technology, and cross-border R&D: investment, licensing, and collaboration.",
     accent: "#4A7C4E",
   },
 ];
@@ -73,7 +81,7 @@ export default function HomeNav() {
             <span className="h-px w-10 bg-forest" />
           </motion.div>
           <h2 className="mt-3 font-display text-[clamp(1.6rem,3.5vw,2.8rem)] leading-[1.1] tracking-tight mx-auto max-w-2xl">
-            The full picture, in four parts.
+            The full picture, in five parts.
           </h2>
         </div>
 

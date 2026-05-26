@@ -27,10 +27,10 @@ export default function ProductsPage() {
       />
       <ProductsShowcase />
       <NextPageCTA
-        href="/partner"
-        meta="Partner"
-        title="Partner with us."
-        body="Four ways to engage: operations partnership, investment, licensing, and collaboration."
+        href="/services"
+        meta="Services"
+        title="Services for waste producers."
+        body="Three ways to hand the problem to Alpha: on-site processing, collection, or sustainability advisory + R&D."
       />
       <PageFooter />
     </main>

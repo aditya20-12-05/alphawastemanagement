@@ -88,10 +88,10 @@ export default function HomeIntro() {
             <span className="absolute inset-0 bg-moss translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
           </Link>
           <Link
-            href="/partner"
+            href="/contact"
             className="inline-flex items-center gap-2 rounded-full border border-line bg-ivory/60 text-ink px-6 py-3.5 text-sm font-medium hover:border-forest hover:text-forest transition-colors"
           >
-            Partner with us
+            Contact us
           </Link>
         </motion.div>
 
