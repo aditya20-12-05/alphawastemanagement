@@ -30,11 +30,12 @@ import { dirname, join } from "node:path";
 const HERE = dirname(fileURLToPath(import.meta.url));
 
 /* Brand colours.
-   - GREEN: sage, used on 'Alpha'. Lighter than forest so it survives a
-     B&W print without washing out.
+   - GREEN: moss — one step darker than sage. Distinct green presence
+     while still printing to a readable mid-dark tone in B&W (forest
+     would be effectively black).
    - GREY: the brand 'muted' tone (same value used on the website nav for
      the 'Waste Management' subtitle). Warm, paper-aware. */
-const GREEN = "#4A7C4E";
+const GREEN = "#2F4E3E";
 const GREY = "#6B6862";
 
 /* --- Font loading --------------------------------------------------------
