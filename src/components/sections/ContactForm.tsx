@@ -81,7 +81,7 @@ export default function ContactForm() {
                   </option>
                 ))}
               </optgroup>
-              <option value="other">Other / not sure</option>
+              <option value="other">Other</option>
             </select>
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted">
               ▾
