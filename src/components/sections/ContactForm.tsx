@@ -81,7 +81,9 @@ export default function ContactForm() {
                   </option>
                 ))}
               </optgroup>
-              <option value="other">Other</option>
+              <option value="other" style={{ fontWeight: 700 }}>
+                Other
+              </option>
             </select>
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted">
               ▾
