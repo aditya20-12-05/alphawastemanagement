@@ -49,7 +49,7 @@ export default function Navigation() {
         >
           <Link href="/" className="group">
             <span className="flex flex-col items-center leading-none">
-              <span className="font-display text-lg sm:text-xl tracking-tight text-forest">
+              <span className="font-display text-4xl sm:text-5xl tracking-tight text-forest">
                 Alpha
               </span>
               {/* paddingLeft compensates for the trailing letter-spacing —

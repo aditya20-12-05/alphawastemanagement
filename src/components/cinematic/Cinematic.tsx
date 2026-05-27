@@ -130,7 +130,7 @@ function CornerMarks() {
 
 function TitleStrip() {
   return (
-    <div className="absolute top-8 sm:top-10 left-0 right-0 z-20 px-6 text-center pointer-events-none">
+    <div className="absolute top-28 sm:top-32 left-0 right-0 z-20 px-6 text-center pointer-events-none">
       <div className="text-[10px] font-mono uppercase tracking-[0.28em] text-muted">
         § Process
       </div>
@@ -143,7 +143,7 @@ function TitleStrip() {
 
 function ProgressBar({ activePhase }: { activePhase: number }) {
   return (
-    <div className="absolute top-32 sm:top-36 left-1/2 -translate-x-1/2 z-30">
+    <div className="absolute top-52 sm:top-60 left-1/2 -translate-x-1/2 z-30">
       <div className="flex items-center gap-2 sm:gap-3">
         {PHASES.map((p, i) => (
           <motion.div

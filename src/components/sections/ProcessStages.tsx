@@ -106,7 +106,7 @@ export default function ProcessStages() {
 
         <div className="relative h-full flex flex-col px-5 sm:px-8">
           {/* Header pinned through the whole experience */}
-          <div className="pt-16 sm:pt-28 pb-2 max-w-3xl mx-auto w-full text-center">
+          <div className="pt-32 sm:pt-36 pb-2 max-w-3xl mx-auto w-full text-center">
             <SectionLabel number="§ 02" title="The Stages" variant="dark" prominent />
             <p className="mt-4 sm:mt-5 text-base sm:text-[17px] text-paper/85 leading-relaxed mx-auto max-w-xl">
               Patented stages, one closed loop.
